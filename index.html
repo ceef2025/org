@@ -3,295 +3,254 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🌟 Diwali: The Festival of Lights 🌟</title>
-    
+    <title>Annual Team Celebration - You're Invited!</title>
+    <!-- Load Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* MINIMAL CSS FOR FESTIVE LOOK AND BASIC LAYOUT */
+        /* Custom styles to enhance the aesthetic */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
         
-        @import url('https://fonts.googleapis.com/css2?family=Marcellus+SC&family=Inter:wght@400;700&display=swap');
-        
+        :root {
+            --primary-color: #034f84; /* Deep Ocean Blue */
+            --accent-color: #f7a83d;  /* Gold/Copper Accent */
+            --background-start: #042e4e;
+            --background-end: #034f84;
+        }
+
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #FFF8E1; /* Very Light Yellow/Cream */
-            color: #333;
-            margin: 0;
-            padding: 0;
-            line-height: 1.6;
-        }
-
-        /* Festive Title Font */
-        .festive-title {
-            font-family: 'Marcellus SC', serif;
-            letter-spacing: 0.1em;
-        }
-
-        /* Header Styling */
-        header {
-            background-color: #FF6600; /* Vibrant Orange */
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            position: sticky;
-            top: 0;
-            z-index: 50;
-        }
-
-        header h1 {
-            color: #FFFFCC; /* Pale Yellow/Gold for contrast */
-            padding: 15px 10px;
-            text-align: center;
-            font-size: 2em;
-        }
-        
-        /* Navigation Styling - UPDATED FOR PROPER LOOK */
-        #main-nav {
-            background-color: #CC0000; /* Deep Red */
-            padding: 10px 0;
-            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
-        }
-
-        #nav-links {
-            max-width: 1200px;
-            margin: 0 auto;
+            background: linear-gradient(135deg, var(--background-start) 0%, var(--background-end) 100%);
+            min-height: 100vh;
             display: flex;
-            flex-wrap: wrap;
+            align-items: center;
             justify-content: center;
-            padding: 0 10px;
-            gap: 10px; /* Use gap for cleaner spacing between links */
         }
 
-        .nav-link {
-            color: #FFFFCC;
-            font-weight: 700; /* Explicit bold weight */
-            font-size: 0.9em;
-            text-decoration: none;
-            padding: 10px 20px; /* Increased padding for substantial look */
-            border-radius: 25px; /* Slightly more rounded */
-            background-color: #A00000; /* Darker Red button */
-            transition: background-color 0.2s, transform 0.2s;
-            text-transform: uppercase; /* Added for a professional navigation look */
-            box-shadow: 0 1px 3px rgba(0,0,0,0.3); /* Subtle button shadow */
+        .invitation-card {
+            background-color: #ffffff;
+            /* Subtle reflection/glass effect on dark background */
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 
+                        0 0 0 1px rgba(255, 255, 255, 0.1);
+            animation: fadeIn 1s ease-out;
         }
 
-        .nav-link:hover {
-            background-color: #FF8C00; /* Bright Orange hover */
+        .accent-text {
+            color: var(--accent-color);
+            font-family: 'Playfair Display', serif;
+        }
+
+        .glow-button {
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(247, 168, 61, 0.4);
+        }
+
+        .glow-button:hover {
+            box-shadow: 0 6px 20px rgba(247, 168, 61, 0.7);
+            transform: translateY(-2px);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .feature-item {
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .feature-item:hover {
             transform: scale(1.05);
         }
 
-        /* Main Content Layout */
-        main {
-            max-width: 1200px;
-            margin: 20px auto;
-            padding: 0 15px;
-        }
-        
-        /* Section Styling */
-        .section-box {
-            background-color: #FFFFFF;
-            padding: 20px;
-            margin-bottom: 30px;
-            border-radius: 10px;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-            border-left: 8px solid #DD6B20; /* Deep Orange accent */
-        }
-
-        .section-box h2 {
-            color: #FF6600;
-            font-size: 1.8em;
-            margin-bottom: 15px;
-            padding-bottom: 5px;
-            border-bottom: 2px solid #FFDAB9;
-        }
-        
-        /* Media and Flex Containers (Used for two-column layouts) */
-        .grid-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-
-        .grid-item-half {
-            flex: 1 1 45%; /* Two items per row on larger screens */
-            padding: 15px;
-            background-color: #FFF3E0; /* Very light orange accent */
-            border-radius: 8px;
-            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
-        }
-
-        .grid-item-quarter {
-            flex: 1 1 22%; /* Four items per row on larger screens */
-            min-width: 100px; /* Ensure images don't get too small */
-        }
-
-        .img-responsive {
-            max-width: 100%;
-            height: auto;
-            border-radius: 6px;
-            display: block;
-        }
-        
-        /* Responsive adjustments for smaller screens */
-        @media (max-width: 768px) {
-            header h1 {
-                font-size: 1.5em;
-            }
-            .grid-item-half, .grid-item-quarter {
-                flex-basis: 100%; /* Stack items on small screens */
-            }
-            .section-box h2 {
-                font-size: 1.5em;
-            }
-        }
-        
-        /* Footer Styling */
-        footer {
-            background-color: #CC0000;
-            color: #FFFFCC;
-            padding: 20px 10px;
-            text-align: center;
-            margin-top: 40px;
-        }
-        
     </style>
 </head>
 <body>
 
-    <!-- Header & Navigation -->
-    <header>
-        <div class="max-width-7xl-like">
-            <h1 class="festive-title">
-                Deepavali: Triumph of Light
+    <div class="invitation-card max-w-4xl w-[95%] mx-auto p-6 md:p-12 lg:p-16 rounded-3xl backdrop-blur-sm">
+        
+        <!-- Header & Title - UPDATED -->
+        <header class="text-center mb-10">
+            <!-- New Heading: DTAG CEEF 2025 -->
+            <h1 class="text-4xl md:text-5xl font-extrabold text-[--primary-color] mb-1">
+                DTAG CEEF 2025
             </h1>
-        </div>
-        
-        <!-- Navigation Bar with Sections -->
-        <nav id="main-nav">
-            <div id="nav-links">
-                <a href="#snacks" class="nav-link">Snacks</a>
-                <a href="#crackers" class="nav-link">Crackers</a>
-                <a href="#decoration" class="nav-link">Home Decoration</a>
-                <a href="#killa" class="nav-link">Killa & Lantern</a>
-                <a href="#rangoli" class="nav-link">Makino Rangoli</a>
-            </div>
-        </nav>
-    </header>
-
-    <main>
-
-        <!-- Introduction & Personal Touch -->
-        <section id="intro" style="text-align: center; padding: 25px; background-color: #FFFAEC; border-radius: 10px; box-shadow: 0 4px 10px rgba(255, 102, 0, 0.3);">
-            <h2 class="festive-title" style="color: #CC0000; font-size: 1.8em; margin-bottom: 10px;">Our Diwali Story: A Personal Celebration!</h2>
-            <p style="font-size: 1.1em; margin-bottom: 20px;">
-                Diwali, for our family, is not just a festival; it's the warmth of togetherness, the sparkle of tradition, and the sweet taste of homemade joy. This page captures the vibrant spirit of how we celebrate the victory of light over darkness every year.
+            <p class="text-lg font-semibold text-gray-600 mb-2">Presents the</p>
+            <h2 class="text-5xl md:text-6xl font-extrabold text-gray-900 accent-text leading-tight">
+                Annual Team Celebration
+            </h2>
+            <!-- New Theme added -->
+            <p class="text-2xl mt-4 mb-4 font-bold text-[--primary-color] border-y-2 border-dashed py-2 border-gray-300">
+                Theme: Azure Nights
             </p>
-            <div class="grid-container">
-                <!-- Personal Photo Placeholders -->
-                <div class="grid-item-quarter">
-                    <img src="./puja.jpg" alt="Diwali Pooja photo" class="img-responsive">
-                </div>
-                <div class="grid-item-quarter">
-                    <img src="./cloath.png" alt="Wearing new Diwali clothes" class="img-responsive">
-                </div>
-                <div class="grid-item-quarter">
-                    <img src="./diya.jpg" alt="Row of lit Diyas" class="img-responsive">
-                </div>
-                <div class="grid-item-quarter">
-                    <img src="./box.png" alt="Exchanging gifts" class="img-responsive">
-                </div>
-            </div>
-        </section>
+            <p class="text-xl max-w-2xl mx-auto text-gray-700">
+                An evening of connection, celebration, and relaxation as we come together to acknowledge our collective achievements.
+            </p>
+        </header>
 
-        <!-- 1. Snacks (Mithai and Savories) -->
-        <section id="snacks" class="section-box">
-            <h2>🍪 Traditional Diwali Snacks & Mithai</h2>
-            <p style="margin-bottom: 20px;">Gujarati Diwali treats include savory snacks like chakli, fafda, and sev, known for their crispy texture and spicy-salty taste. Sweet delicacies are equally important, with mohanthal, a rich gram flour fudge, being a staple. Other popular sweets include besan ladoo, chikki, and milk-based treats like shrikhand and basundi, which are often enjoyed with festive meals or as a special dessert. </p>
+        <!-- Key Details Section -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center mb-12">
             
-            <div class="grid-container">
-                <div class="grid-item-half">
-                    <img src="./snacks.jpg" alt="Image of Besan Ladoo" class="img-responsive" style="margin-top: 10px;">
-                </div>
-                <div class="grid-item-half">
-                    <h3 style="color: #CC0000; margin-bottom: 8px;">Audio: The Joy of Cooking</h3>
-                    <p style="font-size: 0.9em; margin-bottom: 10px;">Listen to the comforting sizzle of <em>Jalebi</em> being fried in the background—the sound of a bustling Diwali kitchen!</p>
-                    <!-- Audio Element -->
-                    <audio controls style="width: 100%; background-color: #FFDAB9; padding: 5px; border-radius: 4px;">
-                        <source src="mock_diwali_cooking_sizzle.mp3" type="audio/mp3">
-                        Your browser does not support the audio element.
-                    </audio>
-                </div>
+            <div class="p-4 rounded-xl border border-gray-200 bg-gray-50 feature-item">
+                <span class="text-4xl accent-text">📅</span>
+                <p class="font-bold text-xl mt-2 text-gray-800">Date</p>
+                <p class="text-lg text-gray-600">Thursday, 27th November</p>
             </div>
-        </section>
+            
+            <div class="p-4 rounded-xl border border-gray-200 bg-gray-50 feature-item">
+                <span class="text-4xl accent-text">📍</span>
+                <p class="font-bold text-xl mt-2 text-gray-800">Venue</p>
+                <p class="text-lg text-gray-600">Akasa Pool & Kitchen Bar</p>
+                <button onclick="goToVenue()" class="text-sm mt-1 text-blue-600 hover:text-blue-800 transition duration-150 underline">
+                    View Location
+                </button>
+            </div>
 
-        <!-- 2. Crackers (Symbolic Fireworks) -->
-        <section id="crackers" class="section-box">
-            <h2>💥 The Crackle and Pop of Diwali</h2>
-            <p style="margin-bottom: 20px;">While we prioritize safe and sound-conscious celebrations, fireworks are traditionally used to ward off evil spirits and signify prosperity. We stick to sparklers (phuljhari) and environmentally friendly options that light up the night sky safely!</p>
-            
-            <img src="./megh.png" alt="Image of sparklers" class="img-responsive" style="margin-bottom: 10px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);">
-            
-            <div style="text-align: center; font-size: 0.9em; font-style: italic; color: #555;">
-                Safety First: Always celebrate responsibly and keep pets safe during the fireworks display!
+            <div class="p-4 rounded-xl border border-gray-200 bg-gray-50 feature-item">
+                <span class="text-4xl accent-text">⏰</span>
+                <p class="font-bold text-xl mt-2 text-gray-800">Time</p>
+                <p class="text-lg text-gray-600">6:30 PM – 10:30 PM</p>
             </div>
-        </section>
-
-        <!-- 3. Home Decoration -->
-        <section id="decoration" class="section-box">
-            <h2>✨ Lighting Up Our Home: Diyas and Lights</h2>
-            <p style="margin-bottom: 20px;">The word <em>Deepavali</em> means 'Row of Lights' (<em>Deepa</em> = light, <em>avali</em> = row). We meticulously clean the entire house and illuminate every corner with earthen lamps (diyas) and string lights (torans) to welcome the goddess Lakshmi.</p>
-            
-            <div class="grid-container">
-                <div style="flex: 1 1 30%;">
-                    <img src="./rangoli.png" alt="Diwali Diyas" class="img-responsive" style="height: 100%; object-fit: cover;">
-                </div>
-                <div style="flex: 1 1 60%;">
-                    <h3 style="color: #CC0000; margin-bottom: 8px;">Video: Decorating the House</h3>
-                    <p style="font-size: 0.9em; margin-bottom: 10px;">Watch a short clip of our home being decorated with colorful LED string lights and hanging lanterns.</p>
-                    <!-- Video Embed Placeholder (Aspect Ratio CSS for responsiveness) -->
-                    <div style="position: relative; padding-bottom: 56.25%; /* 16:9 Aspect Ratio */ height: 0; overflow: hidden; max-width: 100%;">
-                        <iframe style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 8px;" src="https://www.youtube.com/watch?v=4QF5IZ1xxoQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- 4. Killa (Fort) and Lantern (Akash Kandil) -->
-        <section id="killa" class="section-box">
-            <h2>Lantern: Art and Heritage</h2>
-            <p style="margin-bottom: 20px;">The <em>Akash Kandil</em> (Sky Lantern) is a gorgeous, handmade paper lantern hung outside, illuminating the night sky.</p>
-            
-            <div class="grid-container">
-                <div style="flex: 1 1 30%;">
-                    <img src="./make.png" alt="Image of a colorful Akash Kandil" class="img-responsive" style="object-fit: cover;">
-                </div>
-            </div>
-        </section>
-        
-        <!-- 5. Makino Rangoli (Making a Rangoli) -->
-        <section id="rangoli" class="section-box">
-            <h2>🎨 Making the Rangoli: Colors of Joy</h2>
-            <p style="margin-bottom: 20px;">Rangoli, a beautiful floor art created using colored powders, flowers, or rice, is drawn at the entrance of the home. It is believed to be a sacred welcoming area for the Gods, especially Lakshmi. Our family loves creating intricate, bright patterns!</p>
-            
-            <img src="./make2.png" alt="Image of a vibrant Rangoli design" class="img-responsive" style="box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);">
-        </section>
-        
-    </main>
-    
-    <!-- Footer -->
-    <footer>
-        <div class="max-width-7xl-like">
-            <p class="festive-title" style="font-size: 1.2em; margin-bottom: 5px;">&copy; School Project 2025 | Happy Diwali to all!</p>
-            <p style="font-size: 0.9em;">The information on this page celebrates the traditions and joy of Diwali.</p>
         </div>
-    </footer>
 
-    <!-- JavaScript for smooth scrolling (optional but kept as it's basic JS) -->
+        <!-- Description and Features -->
+        <section class="mb-12">
+            <h2 class="text-3xl font-bold text-center mb-6 accent-text">Poolside Experience</h2>
+            <p class="text-center text-gray-700 max-w-3xl mx-auto mb-8">
+                This gathering is an opportunity to strengthen our bonds, share insights, and celebrate the milestones we’ve achieved as a team. Join us for a memorable evening featuring:
+            </p>
+            
+            <!-- Features Grid -->
+            <div class="flex flex-wrap justify-center gap-4">
+                <span class="bg-blue-50 text-primary-color px-5 py-2 rounded-full font-medium shadow-sm transition hover:bg-blue-100">🎶 Great Music</span>
+                <span class="bg-blue-50 text-primary-color px-5 py-2 rounded-full font-medium shadow-sm transition hover:bg-blue-100">🍽️ Delicious Cuisine</span>
+                <span class="bg-blue-50 text-primary-color px-5 py-2 rounded-full font-medium shadow-sm transition hover:bg-blue-100">🤝 Engaging Conversations</span>
+            </div>
+        </section>
+
+        <!-- Countdown Timer -->
+        <section class="text-center mb-12 p-6 bg-gray-800 rounded-xl shadow-lg">
+            <h3 class="text-2xl font-semibold text-white mb-4">Time Remaining Until The Celebration!</h3>
+            <div id="countdown" class="flex justify-center space-x-4 text-white">
+                <!-- Countdown segments will be injected here -->
+            </div>
+        </section>
+
+
+        <!-- RSVP Call to Action -->
+        <footer class="text-center">
+            <p class="text-xl text-gray-700 mb-6 font-medium">
+                We look forward to your presence! Please confirm your attendance.
+            </p>
+
+            <button id="rsvpButton" 
+                    onclick="confirmRsvp()"
+                    class="glow-button bg-[--accent-color] text-gray-800 font-extrabold py-4 px-10 rounded-full text-lg uppercase tracking-wider hover:bg-yellow-500 transition duration-300 transform">
+                Visit Link and Confirm Your Presence
+            </button>
+
+            <p id="rsvpMessage" class="mt-4 text-green-600 font-semibold hidden">
+                Thank you! Redirecting you to the confirmation page...
+            </p>
+        </footer>
+
+    </div>
+
     <script>
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
+        // --- Configuration ---
+        const VENUE_LINK = 'https://share.google/fwKeUPs37AoyAEqiM';
+        
+        // Define the event date (e.g., Nov 27th, 2025 at 6:30 PM)
+        // Note: I'm picking a generic year near the current date to make the countdown functional.
+        const EVENT_DATE = new Date("November 27, 2025 18:30:00").getTime();
+
+        /**
+         * Converts milliseconds to days, hours, minutes, and seconds.
+         * @param {number} distance - Time in milliseconds.
+         * @returns {{days: string, hours: string, minutes: string, seconds: string}}
+         */
+        function getTimeRemaining(distance) {
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            
+            // Pad single digits with a leading zero for aesthetics
+            return {
+                days: String(days).padStart(2, '0'),
+                hours: String(hours).padStart(2, '0'),
+                minutes: String(minutes).padStart(2, '0'),
+                seconds: String(seconds).padStart(2, '0')
+            };
+        }
+
+        /**
+         * Updates the countdown timer display every second.
+         */
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = EVENT_DATE - now;
+            const countdownEl = document.getElementById('countdown');
+
+            if (distance < 0) {
+                clearInterval(countdownInterval);
+                countdownEl.innerHTML = '<span class="text-4xl text-green-400">The Party is Happening Now!</span>';
+                return;
+            }
+
+            const t = getTimeRemaining(distance);
+
+            countdownEl.innerHTML = `
+                ${createTimeBlock(t.days, 'Days')}
+                ${createTimeBlock(t.hours, 'Hours')}
+                ${createTimeBlock(t.minutes, 'Minutes')}
+                ${createTimeBlock(t.seconds, 'Seconds')}
+            `;
+        }
+        
+        /**
+         * Creates an HTML block for a single time unit (Day, Hour, etc.).
+         * @param {string} value - The numeric value.
+         * @param {string} label - The unit label.
+         */
+        function createTimeBlock(value, label) {
+            return `
+                <div class="text-center p-3 bg-gray-700 rounded-lg w-20">
+                    <div class="text-3xl font-mono font-bold">${value}</div>
+                    <div class="text-xs uppercase mt-1 tracking-wider">${label}</div>
+                </div>
+            `;
+        }
+
+        /**
+         * Handles the RSVP button click: shows a message and redirects.
+         */
+        function confirmRsvp() {
+            const button = document.getElementById('rsvpButton');
+            const message = document.getElementById('rsvpMessage');
+            
+            // 1. Visually confirm the action
+            button.disabled = true;
+            button.classList.add('bg-gray-400');
+            button.classList.remove('glow-button');
+            message.classList.remove('hidden');
+                window.location.href = 'https://forms.office.com/Pages/ResponsePage.aspx?id=B8QI3rkZfUKf6O3yVDAMpyDUGQEkx55BntRrR2LdtQFUMzNBRURVOVRCRUpLOTg0WldIU0k4Q1JOQS4u';
+            
+        }
+        
+        /**
+         * Handles the 'View Location' button click.
+         */
+        function goToVenue() {
+             window.open(VENUE_LINK, '_blank');
+        }
+
+
+        // --- Initialization ---
+        // 1. Start the countdown timer
+        updateCountdown();
+        const countdownInterval = setInterval(updateCountdown, 1000);
+
     </script>
+
 </body>
 </html>
