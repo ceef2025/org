@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Annual Team Celebration - You're Invited!</title>
-    <!-- Load Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         /* Custom styles to enhance the aesthetic */
@@ -17,8 +16,8 @@
             --accent-color-1: #ffc107; /* Bright Amber */
             --accent-color-2: #ff7f50; /* Coral */
             --background-start: #f8c8dc; /* Lighter Pink/Purple */
-            --background-mid: #b89dcf;   /* Medium Lavender */
-            --background-end: #845ec2;   /* Deeper Purple */
+            --background-mid: #b89dcf;    /* Medium Lavender */
+            --background-end: #845ec2;    /* Deeper Purple */
         }
 
         body {
@@ -32,13 +31,11 @@
         }
 
         .invitation-card {
-            /* UPDATED: Removed border and added a light gradient */
             background: linear-gradient(180deg, #ffffff 0%, #fefefe 100%); 
             border-radius: 2rem; /* More rounded */
             box-shadow: 0 25px 60px rgba(0, 0, 0, 0.3), 
                         0 0 0 1px rgba(255, 255, 255, 0.2);
             animation: fadeIn 1s ease-out;
-            /* border: 2px solid var(--accent-color-2); -- REMOVED */
         }
 
         .main-title {
@@ -101,14 +98,38 @@
             color: #fff;
         }
 
+        /* --- New Performers List CSS --- */
+        #performersList {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.7s ease-in-out;
+            border-top: 1px solid transparent; /* Ensures transition works smoothly */
+        }
+
+        #performersList.open {
+            max-height: 500px; /* Large enough value to show content */
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+            padding-top: 1rem;
+        }
+
+        .list-item-glow {
+            transition: background-color 0.3s ease;
+            cursor: default;
+        }
+
+        .list-item-glow:hover {
+            background-color: #fce4ec; /* Light pink/rose hover effect */
+        }
+        /* --- End New Performers List CSS --- */
     </style>
 </head>
 <body>
 
     <div class="invitation-card max-w-4xl w-[95%] mx-auto p-6 md:p-12 lg:p-16">
         
-        <!-- Header & Title - UPDATED for color and removed theme text -->
         <header class="text-center mb-10">
+            <p id="timeOfDayGreeting" class="text-xl font-medium text-gray-500 mb-2 transition duration-500 transform scale-95"></p>
+
             <h1 class="text-4xl md:text-5xl font-extrabold main-title mb-1">
                 DTAG CEEF 2025
             </h1>
@@ -121,7 +142,6 @@
             </p>
         </header>
 
-        <!-- Key Details Section -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center mb-12">
             
             <div class="p-4 rounded-xl border-gray-200 bg-gray-50 feature-item">
@@ -146,31 +166,55 @@
             </div>
         </div>
 
-        <!-- Description and Features -->
         <section class="mb-12">
             <h2 class="text-3xl font-bold text-center mb-6 sub-heading">Poolside Experience</h2>
             <p class="text-center text-gray-700 max-w-3xl mx-auto mb-8">
                 This gathering is an opportunity to strengthen our bonds, share insights, and celebrate the milestones we’ve achieved as a team. Join us for a memorable evening featuring:
             </p>
             
-            <!-- Features Grid -->
             <div class="flex flex-wrap justify-center gap-4">
                 <span class="feature-tag px-5 py-2 rounded-full font-medium shadow-sm transition">🎶 Great Music</span>
                 <span class="feature-tag px-5 py-2 rounded-full font-medium shadow-sm transition">🍽️ Delicious Cuisine</span>
                 <span class="feature-tag px-5 py-2 rounded-full font-medium shadow-sm transition">🤝 Engaging Conversations</span>
             </div>
         </section>
+        
+        <section class="mb-12 p-6 rounded-xl bg-purple-50 shadow-inner">
+            <div class="flex justify-between items-center cursor-pointer" onclick="togglePerformers()">
+                <h3 class="text-2xl font-bold text-gray-800 sub-heading flex items-center">
+                    <span class="text-3xl mr-3">🌟</span> Performance-Focused List
+                </h3>
+                <button id="togglePerformersButton" class="text-xl font-bold text-gray-600 transition duration-300 transform rotate-0">
+                    +
+                </button>
+            </div>
 
-        <!-- Countdown Timer -->
-        <section class="text-center mb-12 p-6 rounded-xl shadow-lg countdown-section">
-            <h3 class="text-2xl font-semibold text-white mb-4">Time Remaining Until The Celebration!</h3>
-            <div id="countdown" class="flex justify-center space-x-4 text-white">
-                <!-- Countdown segments will be injected here -->
+            <div id="performersList">
+                <div class="mt-4 space-y-3">
+                    <p class="text-xl font-semibold text-gray-700 main-title">🌟 The Performers</p>
+                    <ul class="list-none space-y-1 pl-0">
+                        <li class="p-2 rounded-md list-item-glow"><strong class="text-indigo-600">Vocalist:</strong> Ritesh Rokade</li>
+                        <li class="p-2 rounded-md list-item-glow"><strong class="text-indigo-600">Dance Artist:</strong> Suraj Mane, Vishwanath Mane</li>
+                    </ul>
+
+                    <p class="text-xl font-semibold text-gray-700 main-title mt-4">Other Contributors / Team</p>
+                    <ul class="list-disc list-inside space-y-1 pl-4 text-gray-600">
+                        <li class="list-item-glow">Arya Rinayat</li>
+                        <li class="list-item-glow">Shivani Mhaisekar</li>
+                        <li class="list-item-glow">Nikunj Jain</li>
+                        <li class="list-item-glow">Karan Bhore</li>
+                    </ul>
+                </div>
             </div>
         </section>
 
+        <section class="text-center mb-12 p-6 rounded-xl shadow-lg countdown-section">
+            <h3 class="text-2xl font-semibold text-white mb-4">Time Remaining Until The Celebration!</h3>
+            <div id="countdown" class="flex justify-center space-x-4 text-white">
+                </div>
+        </section>
 
-        <!-- RSVP Call to Action -->
+
         <footer class="text-center">
             <p class="text-xl text-gray-700 mb-6 font-medium">
                 We look forward to your presence! Please confirm your attendance.
@@ -192,10 +236,57 @@
     <script>
         // --- Configuration ---
         const VENUE_LINK = 'https://share.google/fwKeUPs37AoyAEqiM';
+        const RSVP_LINK = 'https://forms.office.com/Pages/ResponsePage.aspx?id=B8QI3rkZfUKf6O3yVDAMpyDUGQEkx55BntRrR2LdtQFUMzNBRURVOVRCRUpLOTg0WldIU0k4Q1JOQS4u';
         
         // Define the event date (e.g., Nov 27th, 2025 at 6:30 PM)
-        // Note: I'm picking a generic year near the current date to make the countdown functional.
         const EVENT_DATE = new Date("November 27, 2025 18:30:00").getTime();
+
+        // --- Core Functions ---
+
+        /**
+         * Sets a dynamic greeting in the header based on the current time of day.
+         */
+        function setDynamicGreeting() {
+            const now = new Date();
+            const hour = now.getHours();
+            let greeting = 'Hello!';
+
+            if (hour < 12) {
+                greeting = 'Good Morning! ☀️';
+            } else if (hour < 18) {
+                greeting = 'Good Afternoon! ☕';
+            } else {
+                greeting = 'Good Evening! 🌙';
+            }
+
+            const greetingEl = document.getElementById('timeOfDayGreeting');
+            greetingEl.textContent = greeting;
+            // Apply a slight animation or transition effect
+            greetingEl.style.transform = 'scale(1)';
+            greetingEl.style.color = '#7c3aed'; // A vibrant color for the greeting
+        }
+
+
+        /**
+         * Toggles the visibility of the Performers List with a smooth CSS transition.
+         */
+        function togglePerformers() {
+            const list = document.getElementById('performersList');
+            const button = document.getElementById('togglePerformersButton');
+            
+            const isOpen = list.classList.contains('open');
+
+            if (isOpen) {
+                list.classList.remove('open');
+                button.textContent = '+';
+                button.classList.remove('rotate-45');
+            } else {
+                list.classList.add('open');
+                button.textContent = '−';
+                button.classList.add('rotate-45');
+            }
+        }
+
 
         /**
          * Converts milliseconds to days, hours, minutes, and seconds.
@@ -218,6 +309,21 @@
         }
 
         /**
+         * Creates an HTML block for a single time unit (Day, Hour, etc.).
+         * @param {string} value - The numeric value.
+         * @param {string} label - The unit label.
+         */
+        function createTimeBlock(value, label) {
+            return `
+                <div class="text-center p-3 rounded-lg w-20 countdown-time-block transition duration-500 transform hover:scale-110">
+                    <div class="text-3xl font-mono font-bold">${value}</div>
+                    <div class="text-xs uppercase mt-1 tracking-wider">${label}</div>
+                </div>
+            `;
+        }
+
+
+        /**
          * Updates the countdown timer display every second.
          */
         function updateCountdown() {
@@ -227,7 +333,7 @@
 
             if (distance < 0) {
                 clearInterval(countdownInterval);
-                countdownEl.innerHTML = '<span class="text-4xl text-green-200">The Party is Happening Now!</span>';
+                countdownEl.innerHTML = '<span class="text-4xl text-green-200 animate-pulse">The Party is Happening Now! 🎉</span>';
                 return;
             }
 
@@ -242,20 +348,6 @@
         }
         
         /**
-         * Creates an HTML block for a single time unit (Day, Hour, etc.).
-         * @param {string} value - The numeric value.
-         * @param {string} label - The unit label.
-         */
-        function createTimeBlock(value, label) {
-            return `
-                <div class="text-center p-3 rounded-lg w-20 countdown-time-block">
-                    <div class="text-3xl font-mono font-bold">${value}</div>
-                    <div class="text-xs uppercase mt-1 tracking-wider">${label}</div>
-                </div>
-            `;
-        }
-
-        /**
          * Handles the RSVP button click: shows a message and redirects.
          */
         function confirmRsvp() {
@@ -264,11 +356,15 @@
             
             // 1. Visually confirm the action
             button.disabled = true;
-            button.classList.add('bg-gray-400', 'cursor-not-allowed');
+            button.classList.add('bg-gray-400', 'cursor-not-allowed', 'shadow-none');
             button.classList.remove('glow-button');
             message.classList.remove('hidden');
+            message.classList.add('animate-bounce'); // Added simple animation
 
-            window.location.href = 'https://forms.office.com/Pages/ResponsePage.aspx?id=B8QI3rkZfUKf6O3yVDAMpyDUGQEkx55BntRrR2LdtQFUMzNBRURVOVRCRUpLOTg0WldIU0k4Q1JOQS4u';
+            // 2. Redirect after a small delay for the user to read the message
+            setTimeout(() => {
+                window.location.href = RSVP_LINK;
+            }, 1500); // 1.5 seconds delay
         }
         
         /**
@@ -279,7 +375,9 @@
         }
 
 
-        // --- Initialization ---
+        // --- Initialization (Runs when the page loads) ---
+        setDynamicGreeting();
+
         // 1. Start the countdown timer
         updateCountdown();
         const countdownInterval = setInterval(updateCountdown, 1000);
