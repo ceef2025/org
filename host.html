@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CEEF Host Dashboard</title>
+    <!-- Load Tailwind CSS for utility classes and responsiveness -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Font Awesome for required icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /*
+        * CSS Custom Variables - Matching the main event page
+        */
+        :root {
+            --dark-bg: #0d011f;
+            --neon-pink: #ff47a6;
+            --neon-cyan: #14f7ff;
+            --light-text: #f0f0f0;
+            --glow-pink: rgba(255, 71, 166, 0.6);
+            --glow-cyan: rgba(20, 247, 255, 0.6);
+        }
+
+        /*
+        * Base Styling and Background Gradient
+        */
+        body {
+            background: radial-gradient(circle at top, #1a033b 0%, var(--dark-bg) 100%);
+            color: var(--light-text);
+            font-family: 'Montserrat', sans-serif;
+            min-height: 100vh;
+        }
+
+        /*
+        * Header and Typography Styling
+        */
+        .header-title {
+            font-family: 'Dancing Script', cursive;
+            text-shadow: 0 0 10px var(--neon-cyan), 0 0 20px var(--neon-cyan);
+        }
+
+        .section-title {
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            font-family: 'Dancing Script', cursive;
+            color: var(--neon-pink);
+            text-shadow: 0 0 5px var(--glow-pink);
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        /* Card and Detail Styling */
+        .card {
+            background-color: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(20, 247, 255, 0.2);
+            box-shadow: 0 0 15px rgba(255, 71, 166, 0.3);
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+        }
+
+        /* Table Styling for Detailed Run of Show */
+        .run-of-show th, .run-of-show td {
+            padding: 0.75rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: left;
+        }
+        .run-of-show th {
+            color: var(--neon-cyan);
+            font-weight: 700;
+            text-transform: uppercase;
+            background-color: rgba(20, 247, 255, 0.1);
+        }
+        .run-of-show tr:nth-child(even) {
+            background-color: rgba(0, 0, 0, 0.2);
+        }
+        .run-of-show .time-col {
+            font-weight: bold;
+            color: var(--neon-pink);
+        }
+        
+        /* Coordinator Notes Highlight */
+        .coordinator-note {
+            font-style: italic;
+            color: #ccc;
+            font-size: 0.85rem;
+            padding-top: 0.5rem;
+        }
+
+        /* Home Button (New) */
+        #home-btn {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            background-color: rgba(255, 71, 166, 0.2);
+            border: 1px solid var(--neon-pink);
+            box-shadow: 0 0 10px var(--glow-pink);
+            color: var(--neon-pink);
+            z-index: 10;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+        #home-btn:hover {
+            background-color: rgba(255, 71, 166, 0.4);
+            box-shadow: 0 0 15px var(--neon-pink);
+            transform: scale(1.05);
+        }
+
+        /* Responsive Table adjustments */
+        @media (max-width: 768px) {
+            .run-of-show thead { display: none; }
+            .run-of-show tbody, .run-of-show tr, .run-of-show td { display: block; width: 100%; }
+            .run-of-show tr { margin-bottom: 1rem; border: 1px solid rgba(255, 71, 166, 0.2); border-radius: 0.5rem; }
+            .run-of-show td { text-align: right; padding-left: 50%; position: relative; }
+            .run-of-show td::before {
+                content: attr(data-label);
+                position: absolute;
+                left: 0;
+                width: 50%;
+                padding-left: 10px;
+                font-weight: bold;
+                text-align: left;
+                color: var(--neon-cyan);
+            }
+        }
+    </style>
+</head>
+<body>
+    
+    <!-- Return Home Button (Top Right) -->
+    <a href="templateNew.html" id="home-btn" class="py-2 px-4 rounded-full font-semibold text-sm flex items-center">
+        <i class="fas fa-home mr-2"></i> Return Home
+    </a>
+
+    <div class="container mx-auto p-4 md:p-8">
+        
+        <!-- HEADER -->
+        <header class="text-center mb-12">
+            <h1 class="header-title text-5xl md:text-6xl font-bold mb-2 text-white">
+                <i class="fas fa-screwdriver-wrench text-pink-400 mr-4"></i> Host Control Panel
+            </h1>
+            <p class="text-cyan-400 text-xl">CEEF The Crest Revelry - Detailed Planning Guide</p>
+        </header>
+
+        <!-- DASHBOARD SUMMARY CARDS (Quick status checks) -->
+        <section class="grid md:grid-cols-3 gap-8 mb-16">
+            <div class="card p-6 rounded-xl text-center">
+                <i class="fas fa-clock text-4xl text-cyan-400 mb-2"></i>
+                <h2 class="text-xl font-bold text-white">Current Phase</h2>
+                <p class="text-3xl font-extrabold text-pink-400 mt-2">Award Ceremony</p>
+                <p class="text-sm text-gray-400 mt-1">Next: Closing Remarks (9:00 PM)</p>
+            </div>
+            <div class="card p-6 rounded-xl text-center">
+                <i class="fas fa-headset text-4xl text-cyan-400 mb-2"></i>
+                <h2 class="text-xl font-bold text-white">Performers Ready</h2>
+                <p class="text-3xl font-extrabold text-pink-400 mt-2">4 / 4</p>
+                <p class="text-sm text-gray-400 mt-1">All acts confirmed & mic checked.</p>
+            </div>
+            <div class="card p-6 rounded-xl text-center">
+                <i class="fas fa-star text-4xl text-cyan-400 mb-2"></i>
+                <h2 class="text-xl font-bold text-white">Key: FUN</h2>
+                <p class="text-3xl font-extrabold text-pink-400 mt-2">Access Granted</p>
+                <p class="text-sm text-gray-400 mt-1">Secret Key: 'fun'</p>
+            </div>
+        </section>
+
+        <!-- SECTION 1: DETAILED RUN OF SHOW (ROS) -->
+        <section class="mb-16">
+            <h3 class="section-title"><i class="fas fa-map-pin mr-2"></i> Detailed Run of Show (ROS)</h3>
+            <div class="overflow-x-auto rounded-lg shadow-2xl">
+                <table class="w-full text-sm run-of-show bg-gray-800/60">
+                    <thead>
+                        <tr>
+                            <th class="w-[10%]">Time</th>
+                            <th class="w-[15%]">Activity</th>
+                            <th class="w-[20%]">Performer/MC</th>
+                            <th class="w-[45%]">Coordinator/Technical Notes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="hover:bg-gray-700/50"><td data-label="Time" class="time-col">6:00 PM</td><td data-label="Activity">Setup & Pre-Check</td><td data-label="Performer/MC">All Coordinators</td><td data-label="Coordinator/Technical Notes">AV check complete: Music level, mic volume (2 handhelds, 1 lapel). Ensure all game props (bottles, balloons) are staged discreetly. Test projector for slides/awards.</td></tr>
+                        <tr class="hover:bg-gray-700/50"><td data-label="Time" class="time-col">6:30 PM</td><td data-label="Activity">Guests Arrive / Mingle</td><td data-label="Performer/MC">MC: Ritika & Shivani</td><td data-label="Coordinator/Technical Notes">Play 'CEEF Warmup Mix' (upbeat lounge/pop). Coordinators check in RSVP guests. MCs prep their opening lines.</td></tr>
+                        <tr class="hover:bg-gray-700/50"><td data-label="Time" class="time-col">6:45 PM</td><td data-label="Activity">Welcome & Icebreaker 1</td><td data-label="Performer/MC">MC: Ritika & Shivani</td><td data-label="Coordinator/Technical Notes">Official welcome. Introduce the theme. Start with Icebreaker 1 (Emoji Mail) to engage the front tables. *Tech: Spotlight on MCs.*</td></tr>
+                        <tr class="hover:bg-gray-700/50"><td data-label="Time" class="time-col">7:00 PM</td><td data-label="Activity">Performance Block 1</td><td data-label="Performer/MC">Vishwanath Mane</td><td data-label="Coordinator/Technical Notes">Dance Act 1: Needs the custom EDM track, Fade in/out clean. Lighting: Cyan/Pink strobes. Coordinator check: Vishwanath is ready backstage 5 mins prior.</td></tr>
+                        <tr class="hover:bg-gray-700/50"><td data-label="Time" class="time-col">7:15 PM</td><td data-label="Activity">Performance Block 2</td><td data-label="Performer/MC">Suraj Mane & Anuja</td><td data-label="Coordinator/Technical Notes">Dance Act 2 (Duet): Pop/Bollywood track. Ensure their partner mics are secure. Transition lighting to softer gold/white during the middle emotional part.</td></tr>
+                        <tr class="hover:bg-gray-700/50"><td data-label="Time" class="time-col">7:30 PM</td><td data-label="Activity">Ramp Walk/Icebreaker 2</td><td data-label="Performer/MC">MC: Shivani</td><td data-label="Coordinator/Technical Notes">The CEEF Ramp Walk segment. Select 5-6 stylish attendees quickly. Play 'Runway Mix'. Follow with Icebreaker 2 (Job Theme Song).</td></tr>
+                        <tr class="hover:bg-gray-700/50"><td data-label="Time" class="time-col">7:45 PM</td><td data-label="Activity">Performance Block 3 (Vocal)</td><td data-label="Performer/MC">Ritesh Rokade</td><td data-label="Coordinator/Technical Notes">Vocal Performance (Acoustic). Needs acoustic guitar mic setup. Lighting: Single blue spotlight on Ritesh. Ensure background music fades completely.</td></tr>
+                        <tr class="hover:bg-gray-700/50"><td data-label="Time" class="time-col">8:00 PM</td><td data-label="Activity">Game: Chinese Whispers Dance</td><td data-label="Performer/MC">MC: Ritika (Game Master)</td><td data-label="Coordinator/Technical Notes">Divide audience into 3 teams (10 people each). Use pre-written cards for dance moves (e.g., "The Robot," "Running Man"). Judges ready to score.</td></tr>
+                        <tr class="hover:bg-gray-700/50"><td data-label="Time" class="time-col">8:20 PM</td><td data-label="Activity">Game: Head, Shoulder, Toe</td><td data-label="Performer/MC">MC: Shivani</td><td data-label="Coordinator/Technical Notes">Requires 5-6 water bottles. Groups of 4 per bottle. Fast-paced elimination. Announce game winner loudly.</td></tr>
+                        <tr class="hover:bg-gray-700/50"><td data-label="Time" class="time-col">8:40 PM</td><td data-label="Activity">Awards Ceremony</td><td data-label="Performer/MC">MCs & Leadership</td><td data-label="Coordinator/Technical Notes">Final award slides ready. Ensure gifts/trophies are in order: Vogue, Chronos, Cipher, Echo, Grand Duchess, Melodic, Dynamo, Verbal, Movement. Announce in pairs.</td></tr>
+                        <tr class="hover:bg-gray-700/50"><td data-label="Time" class="time-col">9:10 PM</td><td data-label="Activity">Closing Remarks</td><td data-label="Performer/MC">MCs & Leadership</td><td data-label="Coordinator/Technical Notes">Thank you speech. Call to action for the after-party. Raise music volume (Party Mix).</td></tr>
+                        <tr class="hover:bg-gray-700/50"><td data-label="Time" class="time-col">9:15 PM</td><td data-label="Activity">Mingle & Dinner</td><td data-label="Performer/MC">DJ/Free Time</td><td data-label="Coordinator/Technical Notes">Ensure buffet/bar remains fully stocked. Keep music energetic but conversational. Clean up game area.</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- SECTION 2: PERFORMANCE & ARTIST DETAILS -->
+        <section class="mb-16">
+            <h3 class="section-title"><i class="fas fa-music mr-2"></i> Performance & Technical Artist Details</h3>
+            <div class="grid lg:grid-cols-2 gap-8">
+                <!-- Vishwanath Mane (Solo Dance) -->
+                <div class="card">
+                    <h4 class="text-2xl font-bold text-cyan-400 mb-2">Vishwanath Mane - Dance Act 1</h4>
+                    <ul class="list-disc list-inside text-sm text-gray-300 space-y-2">
+                        <li><span class="font-bold text-pink-400">Type:</span> High-Energy Solo Dance</li>
+                        <li><span class="font-bold text-pink-400">Track:</span> 'Glow Up' - Custom EDM Track (3:30)</li>
+                        <li><span class="font-bold text-pink-400">Notes:</span> Requires clear center stage. Needs 30 seconds of pure black/silence before track starts. Strobe lights ON cue.</li>
+                    </ul>
+                </div>
+                <!-- Suraj Mane & Anuja Pansare (Duet) -->
+                <div class="card">
+                    <h4 class="text-2xl font-bold text-cyan-400 mb-2">Suraj Mane & Anuja - Dance Duet</h4>
+                    <ul class="list-disc list-inside text-sm text-gray-300 space-y-2">
+                        <li><span class="font-bold text-pink-400">Type:</span> Bollywood/Contemporary Duet</li>
+                        <li><span class="font-bold text-pink-400">Track:</span> Medley of 'Aaja Nachle' & 'Jhoome Jo Pathaan' (4:00)</li>
+                        <li><span class="font-bold text-pink-400">Notes:</span> Ensure two lapel mics are fully charged and ready. Needs soft, warm lighting (pink/gold) throughout the routine.</li>
+                    </ul>
+                </div>
+                <!-- Ritesh Rokade (Vocal) -->
+                <div class="card lg:col-span-2">
+                    <h4 class="text-2xl font-bold text-cyan-400 mb-2">Ritesh Rokade - Vocal Performance</h4>
+                    <ul class="list-disc list-inside text-sm text-gray-300 space-y-2">
+                        <li><span class="font-bold text-pink-400">Type:</span> Acoustic Vocal Performance</li>
+                        <li><span class="font-bold text-pink-400">Track:</span> 'Perfect' by Ed Sheeran (Acoustic version)</li>
+                        <li><span class="font-bold text-pink-400">Notes:</span> Critical: Stage must be quiet. Solo handheld mic needed. Setup acoustic guitar input during the previous segment (7:30 PM).</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: GAME MASTER INSTRUCTIONS -->
+        <section class="mb-16">
+            <h3 class="section-title"><i class="fas fa-gamepad mr-2"></i> Game Master Handbook (Rules & Execution)</h3>
+            <div class="space-y-6">
+                
+                <!-- Game 1: Chinese Whispers with Dance -->
+                <div class="card">
+                    <h4 class="text-2xl font-bold text-pink-400 mb-2">1. Chinese Whispers with Dance</h4>
+                    <p class="font-bold text-cyan-400 mb-2">Objective:</p>
+                    <p class="text-gray-300 mb-4 text-sm">To successfully convey a dance move whispered to the first person through non-verbal physical performance to the last person in the chain.</p>
+                    <p class="font-bold text-cyan-400 mb-2">Execution:</p>
+                    <ul class="list-disc list-inside text-sm text-gray-300 space-y-2 pl-4">
+                        <li>Divide 3 teams of 8-10 people. Teams line up side-by-side.</li>
+                        <li>MC whispers the dance name (e.g., 'Macarena', 'Worm', 'T-Rex') to the first person.</li>
+                        <li>The first person TAPS the second person, who turns around. The first person must perform the move for 10 seconds.</li>
+                        <li>The second person attempts to replicate the move for the third person, and so on.</li>
+                        <li>The last person in line must guess the original dance move name aloud to the MC.</li>
+                        <li>**Winner:** The team that correctly guesses or comes closest to the original move wins.</li>
+                    </ul>
+                </div>
+
+                <!-- Game 2: Head, Shoulder, Toe Challenge -->
+                <div class="card">
+                    <h4 class="text-2xl font-bold text-pink-400 mb-2">2. Head, Shoulder, Toe Challenge</h4>
+                    <p class="font-bold text-cyan-400 mb-2">Objective:</p>
+                    <p class="text-gray-300 mb-4 text-sm">To grab the water bottle before the opponent when the keyword "Bottle" is called, despite following conflicting commands.</p>
+                    <p class="font-bold text-cyan-400 mb-2">Execution:</p>
+                    <ul class="list-disc list-inside text-sm text-gray-300 space-y-2 pl-4">
+                        <li>Contestants (pairs) face each other across a small water bottle placed on the ground.</li>
+                        <li>MC calls out body parts: "Head," "Shoulder," "Knee," "Toe." Contestants must touch the called part.</li>
+                        <li>When the MC calls out "BOTTLE," contestants race to grab the water bottle first.</li>
+                        <li>The winner stays and challenges a new opponent.</li>
+                        <li>**Winner:** The person who wins the most rounds (or the last person standing, depending on time).</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        
+        <!-- SECTION 4: ICEBREAKER Q&A DATA (MOCK) -->
+        <section class="mb-16">
+            <h3 class="section-title"><i class="fas fa-question-circle mr-2"></i> Icebreaker Questions & Answer Mock Data</h3>
+            <div class="card">
+                <p class="text-sm text-gray-400 mb-4">Note: These are mock answers/notes gathered from pre-event surveys to ensure MCs have some prepared engagement points.</p>
+                <div class="space-y-4">
+                    
+                    <!-- Q1 -->
+                    <div class="p-3 bg-gray-900/40 rounded-lg border border-pink-400/30">
+                        <p class="font-bold text-pink-400">Q1: Emoji Mail - Which 3 emojis would you use the most?</p>
+                        <ul class="list-disc list-inside text-xs text-gray-400 space-y-1 mt-1 pl-4">
+                            <li><span class="font-bold text-cyan-400">Mock Answer 1 (Vidyasagar):</span> 😅, ☕, 👍. (Note: Mention the 'coffee' emoji is always relevant to his early mornings.)</li>
+                            <li><span class="font-bold text-cyan-400">Mock Answer 2 (Gayatri):</span> ✨, ✅, 🤩. (Note: Highlight the 'sparkle' for her project success updates.)</li>
+                        </ul>
+                    </div>
+
+                    <!-- Q2 -->
+                    <div class="p-3 bg-gray-900/40 rounded-lg border border-pink-400/30">
+                        <p class="font-bold text-pink-400">Q2: Work Habit Influence - What's one common work habit you think you've secretly influenced?</p>
+                        <ul class="list-disc list-inside text-xs text-gray-400 space-y-1 mt-1 pl-4">
+                            <li><span class="font-bold text-cyan-400">Mock Answer 1 (Naveen):</span> "Starting meetings exactly on time." (Note: Good opportunity to playfully rib someone who is always late.)</li>
+                            <li><span class="font-bold text-cyan-400">Mock Answer 2 (Sayali):</span> "Using colorful sticky notes for tasks." (Note: Ask who else has adopted this visual planning habit.)</li>
+                        </ul>
+                    </div>
+                    
+                </div>
+            </div>
+        </section>
+
+        
+    </div>
+</body>
+</html>
