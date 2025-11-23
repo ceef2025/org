@@ -566,6 +566,62 @@
             color: var(--neon-pink);
         }
 
+        /* Modal Styles for Host Login */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+            backdrop-filter: blur(5px);
+        }
+        .modal-content {
+            background: radial-gradient(circle at top, #1a033b 0%, var(--dark-bg) 100%);
+            border: 2px solid var(--neon-pink);
+            box-shadow: 0 0 40px rgba(255, 71, 166, 0.5);
+            padding: 2rem;
+            border-radius: 1rem;
+            width: 90%;
+            max-width: 400px;
+            animation: fadeInScale 0.3s ease-out;
+        }
+        @keyframes fadeInScale {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        .error-message {
+            color: var(--neon-cyan);
+            text-shadow: 0 0 5px rgba(20, 247, 255, 0.3);
+        }
+
+        /* Surprise Performer Styling */
+        .surprise-performer {
+            color: var(--neon-pink);
+            font-weight: 700;
+            text-shadow: 0 0 10px var(--glow-pink), 0 0 20px var(--glow-pink), 0 0 30px rgba(255, 71, 166, 0.8);
+            animation: surpriseGlow 2s ease-in-out infinite alternate;
+            background: linear-gradient(45deg, rgba(255, 71, 166, 0.1), rgba(20, 247, 255, 0.1));
+            padding: 0.2rem 0.5rem;
+            border-radius: 0.25rem;
+            border: 1px solid rgba(255, 71, 166, 0.3);
+        }
+
+        @keyframes surpriseGlow {
+            from { 
+                text-shadow: 0 0 10px var(--glow-pink), 0 0 20px var(--glow-pink), 0 0 30px rgba(255, 71, 166, 0.8);
+                box-shadow: 0 0 5px rgba(255, 71, 166, 0.3);
+            }
+            to { 
+                text-shadow: 0 0 20px var(--glow-pink), 0 0 30px var(--glow-pink), 0 0 40px rgba(255, 71, 166, 1);
+                box-shadow: 0 0 15px rgba(255, 71, 166, 0.6);
+            }
+        }
+
         /* Enhanced Mobile Styles for navbar */
         @media (max-width: 768px) {
             body {
@@ -1008,7 +1064,7 @@
                 <li><a href="#team">Our Team</a></li>
                 <li><a href="#schedule">Schedule</a></li>
                 <li><a href="#awards">Awards & Ramp Walk</a></li>
-                <li><a href="host.html">Host Dashboard</a></li>
+                <li><a href="#" id="host-dashboard-link">Host Dashboard</a></li>
             </ul>
             
             <button class="mobile-menu-btn" id="mobile-menu-btn">
@@ -1433,10 +1489,10 @@
                                 <tr class="hover:bg-gray-700/50"><td data-label="Time" class="time-col">6:45 PM</td><td data-label="Duration">10 min</td><td data-label="Activity/Segment">Welcome & Intro</td><td data-label="Performer/Host">Host: Ritika & Shivani</td><td data-label="Description">Official welcome and quick thank you to initial guests.</td></tr>
                                 
                                 <!-- PERFORMANCES -->
-                                <tr class="hover:bg-gray-700/50"><td data-label="Time" class="time-col">6:55 PM</td><td data-label="Duration">10 min</td><td data-label="Activity/Segment">Performance 1: Solo Dance</td><td data-label="Performer/Host">Vishwanath Mane</td><td data-label="Description">MUSIC: Custom EDM Track 'Glow Up'. LIGHTING: Strobes/High-Energy.</td></tr>
-                                <tr class="hover:bg-gray-700/50"><td data-label="Time" class="time-col">7:05 PM</td><td data-label="Duration">10 min</td><td data-label="Activity/Segment">Performance 2: Solo Dance</td><td data-label="Performer/Host">Suraj Mane</td><td data-label="Description">MUSIC: High-tempo Bollywood. LIGHTING: Red/Gold wash.</td></tr>
-                                <tr class="hover:bg-gray-700/50"><td data-label="Time" class="time-col">7:15 PM</td><td data-label="Duration">10 min</td><td data-label="Activity/Segment">Performance 3: Solo Dance</td><td data-label="Performer/Host">Anuja Pansare</td><td data-label="Description">MUSIC: Contemporary Pop. LIGHTING: Soft Pink/Cyan hues.</td></tr>
-                                <tr class="hover:bg-gray-700/50"><td data-label="Time" class="time-col">7:25 PM</td><td data-label="Duration">10 min</td><td data-label="Activity/Segment">Performance 4: Vocal Act</td><td data-label="Performer/Host">Ritesh Rokade</td><td data-label="Description">MIC: Guitar and Vocal mic check. MUSIC: Acoustic Track.</td></tr>
+                                <tr class="hover:bg-gray-700/50"><td data-label="Time" class="time-col">6:55 PM</td><td data-label="Duration">10 min</td><td data-label="Activity/Segment">Performance 1: Solo Dance</td><td data-label="Performer/Host"><span class="surprise-performer">🎭 SURPRISE PERFORMER 1</span></td><td data-label="Description">MUSIC: Custom EDM Track 'Glow Up'. LIGHTING: Strobes/High-Energy.</td></tr>
+                                <tr class="hover:bg-gray-700/50"><td data-label="Time" class="time-col">7:05 PM</td><td data-label="Duration">10 min</td><td data-label="Activity/Segment">Performance 2: Solo Dance</td><td data-label="Performer/Host"><span class="surprise-performer">🎭 SURPRISE PERFORMER 2</span></td><td data-label="Description">MUSIC: High-tempo Bollywood. LIGHTING: Red/Gold wash.</td></tr>
+                                <tr class="hover:bg-gray-700/50"><td data-label="Time" class="time-col">7:15 PM</td><td data-label="Duration">10 min</td><td data-label="Activity/Segment">Performance 3: Solo Dance</td><td data-label="Performer/Host"><span class="surprise-performer">🎭 SURPRISE PERFORMER 3</span></td><td data-label="Description">MUSIC: Contemporary Pop. LIGHTING: Soft Pink/Cyan hues.</td></tr>
+                                <tr class="hover:bg-gray-700/50"><td data-label="Time" class="time-col">7:25 PM</td><td data-label="Duration">10 min</td><td data-label="Activity/Segment">Performance 4: Vocal Act</td><td data-label="Performer/Host"><span class="surprise-performer">🎤 SURPRISE VOCALIST</span></td><td data-label="Description">MIC: Guitar and Vocal mic check. MUSIC: Acoustic Track.</td></tr>
                                 
                                 <!-- ICEBREAKERS & GAME START -->
                                 <tr class="hover:bg-gray-700/50 bg-indigo-900/40"><td data-label="Time" class="time-col">7:35 PM</td><td data-label="Duration">10 min</td><td data-label="Activity/Segment"><span class="highlight-text">Icebreakers / Warm-up Activity</span></td><td data-label="Performer/Host">Host: Ritika & Shivani</td><td data-label="Description">Fast-paced "Guess the Movie, Song, Tagline of Brand." Keep audience involved and energized. Handheld mics back with Hosts.</td></tr>
@@ -1597,6 +1653,34 @@
 
     </div>
     
+    <!-- HOST LOGIN MODAL -->
+    <div id="host-modal" class="modal-overlay">
+        <div class="modal-content">
+            <h3 class="text-2xl font-bold mb-4 text-center text-pink-400">Host & Coordinator Access</h3>
+            <p class="text-sm text-gray-400 mb-6 text-center">Enter the secret key to access the host dashboard.</p>
+            
+            <input 
+                type="password" 
+                id="secret-key-input" 
+                class="w-full p-3 mb-4 rounded-lg bg-gray-800 border border-cyan-500 text-white focus:ring-2 focus:ring-cyan-400 focus:outline-none placeholder-gray-500" 
+                placeholder="Enter Secret Key"
+                onkeypress="if(event.key === 'Enter') document.getElementById('modal-submit-btn').click();"
+            />
+
+            <p id="modal-error" class="error-message text-center text-sm mb-4" style="display: none;">
+                <i class="fas fa-exclamation-triangle mr-1"></i> Incorrect key. Please try again.
+            </p>
+
+            <div class="flex justify-between space-x-4">
+                <button id="modal-close-btn" class="flex-1 py-2 rounded-lg bg-gray-600 text-white hover:bg-gray-700 transition duration-150">
+                    Cancel
+                </button>
+                <button id="modal-submit-btn" class="flex-1 py-2 rounded-lg bg-pink-600 text-white font-semibold hover:bg-pink-700 transition duration-150">
+                    Access
+                </button>
+            </div>
+        </div>
+    </div>
 
 
     <!-- FOOTER MESSAGE -->
@@ -1605,7 +1689,60 @@
     </footer>
 
     <script>
-        // --- 1. ACCORDION LOGIC for multiple items ---
+        // --- 1. HOST LOGIN MODAL LOGIC ---
+        const modal = document.getElementById('host-modal');
+        const hostDashboardLink = document.getElementById('host-dashboard-link');
+        const modalCloseBtn = document.getElementById('modal-close-btn');
+        const modalSubmitBtn = document.getElementById('modal-submit-btn');
+        const secretKeyInput = document.getElementById('secret-key-input');
+        const modalError = document.getElementById('modal-error');
+        const CORRECT_KEY = 'fun';
+
+        const openModal = (e) => {
+            e.preventDefault(); // Prevent default link behavior
+            modal.style.display = 'flex';
+            secretKeyInput.value = ''; // Clear previous input
+            modalError.style.display = 'none'; // Hide error
+            setTimeout(() => secretKeyInput.focus(), 100); // Focus input
+        };
+
+        const closeModal = () => {
+            modal.style.display = 'none';
+        };
+
+        const checkKey = () => {
+            const enteredKey = secretKeyInput.value.trim().toLowerCase();
+            if (enteredKey === CORRECT_KEY) {
+                // SUCCESS: Redirect to host page
+                window.location.href = 'host.html';
+            } else {
+                // FAILURE: Show error and reload page after a delay
+                modalError.style.display = 'block';
+                secretKeyInput.classList.add('border-red-600');
+                setTimeout(() => {
+                    secretKeyInput.classList.remove('border-red-600');
+                }, 500);
+                
+                // Reload page after 2 seconds for incorrect key
+                setTimeout(() => {
+                    window.location.reload();
+                }, 2000);
+            }
+        };
+
+        // Event listeners
+        hostDashboardLink.addEventListener('click', openModal);
+        modalCloseBtn.addEventListener('click', closeModal);
+        modalSubmitBtn.addEventListener('click', checkKey);
+        
+        // Allow clicking outside the modal content to close it
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+
+        // --- 2. ACCORDION LOGIC for multiple items ---
         const setupAccordions = () => {
             document.querySelectorAll('.accordion-header').forEach(header => {
                 header.removeEventListener('click', toggleAccordion); // Prevent duplicates
@@ -1642,7 +1779,7 @@
             }
         };
 
-        // --- 2. COUNTDOWN TIMER LOGIC ---
+        // --- 3. COUNTDOWN TIMER LOGIC ---
         // Target Date: Thursday, 27th November @ 6:30 PM (Assumed Year: 2025 based on CEEF 2025)
         const targetDate = new Date("November 27, 2025 18:30:00").getTime();
 
@@ -1674,14 +1811,14 @@
 
         let countdownInterval;
         
-        // --- 3. CTA Action ---
+        // --- 4. CTA Action ---
         document.getElementById('confirm-btn').addEventListener('click', () => {
              // In a real application, this would open a modal or navigate to a form.
              console.log("Confirmation button clicked! (In a real app, this would trigger a submission modal.)");
         });
 
 
-        // --- 4. NAVIGATION BAR FUNCTIONALITY ---
+        // --- 5. NAVIGATION BAR FUNCTIONALITY ---
         const navbar = document.getElementById('navbar');
         const mobileMenuBtn = document.getElementById('mobile-menu-btn');
         const navLinks = document.getElementById('nav-links');
