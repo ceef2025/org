@@ -622,6 +622,106 @@
             }
         }
 
+        /* Mystery Team Styling */
+        .surprise-team-container {
+            background: radial-gradient(circle at center, rgba(255, 71, 166, 0.05) 0%, rgba(20, 247, 255, 0.05) 50%, transparent 100%);
+            border-radius: 2rem;
+            padding: 3rem 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .mystery-card {
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 1rem;
+            padding: 2rem 1rem;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .mystery-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .mystery-card:hover::before {
+            left: 100%;
+        }
+
+        .mystery-card:hover {
+            transform: translateY(-8px) scale(1.05);
+            box-shadow: 0 15px 35px rgba(255, 71, 166, 0.2);
+            border-color: rgba(20, 247, 255, 0.4);
+        }
+
+        .mystery-placeholder {
+            position: relative;
+            z-index: 2;
+        }
+
+        .mystery-message {
+            background: linear-gradient(135deg, rgba(20, 247, 255, 0.1), rgba(255, 71, 166, 0.1));
+            border: 1px solid rgba(20, 247, 255, 0.3);
+            border-radius: 1rem;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+
+        /* Mystery Game Styling */
+        .mystery-game, .mystery-activity {
+            color: var(--neon-cyan);
+            font-weight: 700;
+            text-shadow: 0 0 10px var(--glow-cyan), 0 0 20px var(--glow-cyan), 0 0 30px rgba(20, 247, 255, 0.8);
+            animation: mysteryGlow 2.5s ease-in-out infinite alternate;
+            background: linear-gradient(45deg, rgba(20, 247, 255, 0.1), rgba(255, 71, 166, 0.1));
+            padding: 0.3rem 0.7rem;
+            border-radius: 0.5rem;
+            border: 1px solid rgba(20, 247, 255, 0.4);
+            display: inline-block;
+        }
+
+        .mystery-activity {
+            color: var(--neon-pink);
+            text-shadow: 0 0 10px var(--glow-pink), 0 0 20px var(--glow-pink), 0 0 30px rgba(255, 71, 166, 0.8);
+            border: 1px solid rgba(255, 71, 166, 0.4);
+            background: linear-gradient(45deg, rgba(255, 71, 166, 0.1), rgba(20, 247, 255, 0.1));
+        }
+
+        @keyframes mysteryGlow {
+            from { 
+                text-shadow: 0 0 10px var(--glow-cyan), 0 0 20px var(--glow-cyan), 0 0 30px rgba(20, 247, 255, 0.8);
+                box-shadow: 0 0 8px rgba(20, 247, 255, 0.3);
+            }
+            to { 
+                text-shadow: 0 0 20px var(--glow-cyan), 0 0 30px var(--glow-cyan), 0 0 40px rgba(20, 247, 255, 1);
+                box-shadow: 0 0 15px rgba(20, 247, 255, 0.6);
+            }
+        }
+
+        /* Surprise Text Styling */
+        .surprise-text {
+            color: var(--neon-pink);
+            font-weight: 600;
+            text-shadow: 0 0 8px var(--glow-pink);
+            animation: subtleGlow 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes subtleGlow {
+            from { 
+                text-shadow: 0 0 8px var(--glow-pink);
+            }
+            to { 
+                text-shadow: 0 0 12px var(--glow-pink), 0 0 18px rgba(255, 71, 166, 0.6);
+            }
+        }
+
         /* Enhanced Mobile Styles for navbar */
         @media (max-width: 768px) {
             body {
@@ -1061,9 +1161,9 @@
                 <li><a href="#home">Home</a></li>
                 <li><a href="#details">Event Details</a></li>
                 <li><a href="#dresscode">Dress Code</a></li>
-                <li><a href="#team">Our Team</a></li>
-                <li><a href="#schedule">Schedule</a></li>
-                <li><a href="#awards">Awards & Ramp Walk</a></li>
+                <li><a href="#team">Mystery Team</a></li>
+                <li><a href="#schedule">Event Timeline</a></li>
+                <li><a href="#awards">Surprise Awards</a></li>
                 <li><a href="#" id="host-dashboard-link">Host Dashboard</a></li>
             </ul>
             
@@ -1163,289 +1263,62 @@
             </div>
         </section>
         
-        <!-- ACCORDION 2: TEAMS & PERFORMERS - Section Renamed -->
+        <!-- ACCORDION 2: TEAM DETAILS - HIDDEN FOR SURPRISE -->
         <section id="team" class="content-section">
             <div class="accordion-item" id="item-teams">
                 <div class="accordion-header p-6 flex justify-between items-center relative z-10">
                     <span class="text-xl md:text-2xl tracking-wider uppercase font-bold">
-                        <i class="fas fa-users-viewfinder text-pink-400 mr-3 text-2xl"></i> The CEEF Team
+                        <i class="fas fa-user-secret text-pink-400 mr-3 text-2xl"></i> The CEEF Team & Performers
                     </span>
                     <i class="fas fa-chevron-down accordion-icon text-xl"></i>
                 </div>
             <div class="accordion-content">
-                <div class="py-4 space-y-8">
+                <div class="py-4 space-y-8 text-center">
                     
-                    <!-- Event Hosts -->
-                    <div>
-                        <h4 class="text-2xl font-bold text-cyan-400 mb-4 text-center"><i class="fas fa-microphone-lines mr-2"></i> Event Hosts</h4>
-                        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
-                            <!-- Ritika Tiwari -->
-                            <div class="person-card col-span-1">
-                                <img 
-                                    src="./images/Ritika Tiwari.jpg" 
-                                    alt="Photo of Ritika Tiwari"
-                                    class="profile-img w-20 h-20 mx-auto rounded-full object-cover ring-2 ring-pink-500 mb-2"
-                                    onerror="this.onerror=null; this.src='https://placehold.co/80x80/ff47a6/ffffff?text=RT';"
-                                >
-                                <p class="font-bold text-sm">Ritika Tiwari</p>
-                                <p class="role">Host & Coordinator</p>
-                            </div>
-                            <!-- Shivani Mhaisekar -->
-                            <div class="person-card col-span-1">
-                                <img 
-                                    src="./images/Shivani Mhaisekar.jpg" 
-                                    alt="Photo of Shivani Mhaisekar"
-                                    class="profile-img w-20 h-20 mx-auto rounded-full object-cover ring-2 ring-pink-500 mb-2"
-                                    onerror="this.onerror=null; this.src='https://placehold.co/80x80/ff47a6/ffffff?text=SM';"
-                                >
-                                <p class="font-bold text-sm">Shivani Mhaisekar</p>
-                                <p class="role">Host & Coordinator</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Key Performers -->
-                    <div>
-                        <h4 class="text-2xl font-bold text-cyan-400 mb-4 text-center"><i class="fas fa-stars mr-2"></i> Key Performers</h4>
-                        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
-                            <!-- Ritesh Rokade -->
-                            <div class="person-card">
-                                <img 
-                                    src="./images/Ritesh Rokade.jpg" 
-                                    alt="Photo of Ritesh Rokade"
-                                    class="profile-img w-20 h-20 mx-auto rounded-full object-cover ring-2 ring-pink-500 mb-2"
-                                    onerror="this.onerror=null; this.src='https://placehold.co/80x80/ff47a6/ffffff?text=RR';"
-                                >
-                                <p class="font-bold text-sm">Ritesh Rokade</p>
-                                <p class="role">Vocalist</p>
-                            </div>
-                            <!-- Suraj Mane -->
-                            <div class="person-card">
-                                <img 
-                                    src="./images/Suraj Mane.jpg" 
-                                    alt="Photo of Suraj Mane"
-                                    class="profile-img w-20 h-20 mx-auto rounded-full object-cover ring-2 ring-pink-500 mb-2"
-                                    onerror="this.onerror=null; this.src='https://placehold.co/80x80/ff47a6/ffffff?text=SM';"
-                                >
-                                <p class="font-bold text-sm">Suraj Mane</p>
-                                <p class="role">Dance Artist</p>
-                            </div>
-                            <!-- Vishwanath Mane -->
-                            <div class="person-card">
-                                <img 
-                                    src="./images/Vishwanath Mane.jpg" 
-                                    alt="Photo of Vishwanath Mane"
-                                    class="profile-img w-20 h-20 mx-auto rounded-full object-cover ring-2 ring-pink-500 mb-2"
-                                    onerror="this.onerror=null; this.src='https://placehold.co/80x80/ff47a6/ffffff?text=VM';"
-                                >
-                                <p class="font-bold text-sm">Vishwanath Mane</p>
-                                <p class="role">Dance Artist</p>
-                            </div>
-                            <!-- Anuja Pansare -->
-                            <div class="person-card">
-                                <img 
-                                    src="./images/Anuja Pansare.jpg" 
-                                    alt="Photo of Anuja Pansare"
-                                    class="profile-img w-20 h-20 mx-auto rounded-full object-cover ring-2 ring-pink-500 mb-2"
-                                    onerror="this.onerror=null; this.src='https://placehold.co/80x80/ff47a6/ffffff?text=AP';"
-                                >
-                                <p class="font-bold text-sm">Anuja Pansare</p>
-                                <p class="role">Dance Artist</p>
+                    <!-- Mystery Team Section -->
+                    <div class="surprise-team-container">
+                        <div class="mb-8">
+                            <i class="fas fa-mask text-6xl text-pink-400 mb-4 opacity-70"></i>
+                            <h4 class="text-3xl font-bold mb-4">
+                                <span class="surprise-performer">🎭 MYSTERY TEAM & PERFORMERS</span>
+                            </h4>
+                            <p class="text-lg text-gray-300 mb-6">All will be revealed at the event!</p>
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
+                                <!-- Mystery Cards -->
+                                <div class="mystery-card">
+                                    <div class="mystery-placeholder">
+                                        <i class="fas fa-microphone text-4xl text-pink-400 mb-2"></i>
+                                        <p class="font-bold text-sm">Mystery Hosts</p>
+                                        <p class="text-xs text-gray-400">Who will guide us?</p>
+                                    </div>
+                                </div>
+                                <div class="mystery-card">
+                                    <div class="mystery-placeholder">
+                                        <i class="fas fa-music text-4xl text-cyan-400 mb-2"></i>
+                                        <p class="font-bold text-sm">Secret Performers</p>
+                                        <p class="text-xs text-gray-400">Amazing talents await!</p>
+                                    </div>
+                                </div>
+                                <div class="mystery-card">
+                                    <div class="mystery-placeholder">
+                                        <i class="fas fa-cogs text-4xl text-purple-400 mb-2"></i>
+                                        <p class="font-bold text-sm">Core Team</p>
+                                        <p class="text-xs text-gray-400">Behind the magic!</p>
+                                    </div>
+                                </div>
+                                <div class="mystery-card">
+                                    <div class="mystery-placeholder">
+                                        <i class="fas fa-hands-helping text-4xl text-orange-400 mb-2"></i>
+                                        <p class="font-bold text-sm">Event Coordinators</p>
+                                        <p class="text-xs text-gray-400">Making it happen!</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    
-                    <!-- Core Team D-Tag CEEF -->
-                    <div>
-                        <h4 class="text-2xl font-bold text-cyan-400 mb-4 text-center"><i class="fas fa-hands-holding-circle mr-2"></i> Core Team D-Tag CEEF</h4>
-                        <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-8 gap-4 text-sm">
-                            <!-- Vidyasagar Mundada -->
-                            <div class="person-card">
-                                <img 
-                                    src="./images/Vidyasagar Mundada.jpg" 
-                                    alt="Photo of Vidyasagar Mundada"
-                                    class="profile-img w-16 h-16 mx-auto rounded-full object-cover ring-2 ring-cyan-500 mb-2"
-                                    onerror="this.onerror=null; this.src='https://placehold.co/64x64/14f7ff/0d011f?text=VM';"
-                                >
-                                <p class="font-bold">Vidyasagar Mundada</p>
-                            </div>
-                            <!-- Digamber Ranjane -->
-                            <div class="person-card">
-                                <img 
-                                    src="./images/Digamber Ranjane.jpg" 
-                                    alt="Photo of Digamber Ranjane"
-                                    class="profile-img w-16 h-16 mx-auto rounded-full object-cover ring-2 ring-cyan-500 mb-2"
-                                    onerror="this.onerror=null; this.src='https://placehold.co/64x64/14f7ff/0d011f?text=DR';"
-                                >
-                                <p class="font-bold">Digamber Ranjane</p>
-                            </div>
-                            <!-- Naveen Pal -->
-                            <div class="person-card">
-                                <img 
-                                    src="./images/Naveen Pal.jpg" 
-                                    alt="Photo of Naveen Pal"
-                                    class="profile-img w-16 h-16 mx-auto rounded-full object-cover ring-2 ring-cyan-500 mb-2"
-                                    onerror="this.onerror=null; this.src='https://placehold.co/64x64/14f7ff/0d011f?text=NP';"
-                                >
-                                <p class="font-bold">Naveen Pal</p>
-                            </div>
-                            <!-- Kishalaya Bhattacharjee -->
-                            <div class="person-card">
-                                <img 
-                                    src="./images/Kishalaya Bhattacharjee.jpg" 
-                                    alt="Photo of Kishalaya Bhattacharjee"
-                                    class="profile-img w-16 h-16 mx-auto rounded-full object-cover ring-2 ring-cyan-500 mb-2"
-                                    onerror="this.onerror=null; this.src='https://placehold.co/64x64/14f7ff/0d011f?text=KB';"
-                                >
-                                <p class="font-bold">Kishalaya Bhattacharjee</p>
-                            </div>
-                            <!-- Gayatri Patil -->
-                            <div class="person-card">
-                                <img 
-                                    src="./images/Gayatri Patil.jpg" 
-                                    alt="Photo of Gayatri Patil"
-                                    class="profile-img w-16 h-16 mx-auto rounded-full object-cover ring-2 ring-cyan-500 mb-2"
-                                    onerror="this.onerror=null; this.src='https://placehold.co/64x64/14f7ff/0d011f?text=GP';"
-                                >
-                                <p class="font-bold">Gayatri Patil</p>
-                            </div>
-                            <!-- Neeta Bhujbal -->
-                            <div class="person-card">
-                                <img 
-                                    src="./images/Neeta Bhujbal.jpg" 
-                                    alt="Photo of Neeta Bhujbal"
-                                    class="profile-img w-16 h-16 mx-auto rounded-full object-cover ring-2 ring-cyan-500 mb-2"
-                                    onerror="this.onerror=null; this.src='https://placehold.co/64x64/14f7ff/0d011f?text=NB';"
-                                >
-                                <p class="font-bold">Neeta Bhujbal</p>
-                            </div>
-                            <!-- Sayali Jadhav -->
-                            <div class="person-card">
-                                <img 
-                                    src="./images/Sayali Jadhav.jpg" 
-                                    alt="Photo of Sayali Jadhav"
-                                    class="profile-img w-16 h-16 mx-auto rounded-full object-cover ring-2 ring-cyan-500 mb-2"
-                                    onerror="this.onerror=null; this.src='https://placehold.co/64x64/14f7ff/0d011f?text=SJ';"
-                                >
-                                <p class="font-bold">Sayali Jadhav</p>
-                            </div>
-                            <!-- Kunal Pawar -->
-                            <div class="person-card">
-                                <img 
-                                    src="./images/Kunal Pawar.jpg" 
-                                    alt="Photo of Kunal Pawar"
-                                    class="profile-img w-16 h-16 mx-auto rounded-full object-cover ring-2 ring-cyan-500 mb-2"
-                                    onerror="this.onerror=null; this.src='https://placehold.co/64x64/14f7ff/0d011f?text=KP';"
-                                >
-                                <p class="font-bold">Kunal Pawar</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Event Coordinators -->
-                    <div>
-                        <h4 class="text-2xl font-bold text-cyan-400 mb-4 text-center"><i class="fas fa-gears mr-2"></i> Event Coordinators</h4>
-                        <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-8 gap-4 text-sm">
-                            <!-- Nitesh Khandelwal -->
-                            <div class="person-card">
-                                <img 
-                                    src="./images/Nitesh Khandelwal.jpg" 
-                                    alt="Photo of Nitesh Khandelwal"
-                                    class="profile-img w-16 h-16 mx-auto rounded-full object-cover ring-2 ring-pink-500 mb-2"
-                                    onerror="this.onerror=null; this.src='https://placehold.co/64x64/ff47a6/0d011f?text=NK';"
-                                >
-                                <p class="font-bold">Nitesh Khandelwal</p>
-                            </div>
-                            <!-- Aniket Shivane -->
-                            <div class="person-card">
-                                <img 
-                                    src="./images/Aniket Shivane.jpg" 
-                                    alt="Photo of Aniket Shivane"
-                                    class="profile-img w-16 h-16 mx-auto rounded-full object-cover ring-2 ring-pink-500 mb-2"
-                                    onerror="this.onerror=null; this.src='https://placehold.co/64x64/ff47a6/0d011f?text=AS';"
-                                >
-                                <p class="font-bold">Aniket Shivane</p>
-                            </div>
-                            <!-- Harshada Kadam -->
-                            <div class="person-card">
-                                <img 
-                                    src="./images/Harshada Kadam.jpg" 
-                                    alt="Photo of Harshada Kadam"
-                                    class="profile-img w-16 h-16 mx-auto rounded-full object-cover ring-2 ring-pink-500 mb-2"
-                                    onerror="this.onerror=null; this.src='https://placehold.co/64x64/ff47a6/0d011f?text=HK';"
-                                >
-                                <p class="font-bold">Harshada Kadam</p>
-                            </div>
-                            <!-- Rishabh Das -->
-                            <div class="person-card">
-                                <img 
-                                    src="./images/Rishabh Das.jpg" 
-                                    alt="Photo of Rishabh Das"
-                                    class="profile-img w-16 h-16 mx-auto rounded-full object-cover ring-2 ring-pink-500 mb-2"
-                                    onerror="this.onerror=null; this.src='https://placehold.co/64x64/ff47a6/0d011f?text=RD';"
-                                >
-                                <p class="font-bold">Rishabh Das</p>
-                            </div>
-                            <!-- Ram Dhanure -->
-                            <div class="person-card">
-                                <img 
-                                    src="./images/Ram Dhanure.jpg" 
-                                    alt="Photo of Ram Dhanure"
-                                    class="profile-img w-16 h-16 mx-auto rounded-full object-cover ring-2 ring-pink-500 mb-2"
-                                    onerror="this.onerror=null; this.src='https://placehold.co/64x64/ff47a6/0d011f?text=RD';"
-                                >
-                                <p class="font-bold">Ram Dhanure</p>
-                            </div>
-                            <!-- Samarth Gayakhe -->
-                            <div class="person-card">
-                                <img 
-                                    src="./images/Samarth Gayakhe.jpg" 
-                                    alt="Photo of Samarth Gayakhe"
-                                    class="profile-img w-16 h-16 mx-auto rounded-full object-cover ring-2 ring-pink-500 mb-2"
-                                    onerror="this.onerror=null; this.src='https://placehold.co/64x64/ff47a6/0d011f?text=SG';"
-                                >
-                                <p class="font-bold">Samarth Gayakhe</p>
-                            </div>
-                            <!-- Vaibhav Kekan -->
-                            <div class="person-card">
-                                <img 
-                                    src="./images/Vaibhav Kekan.jpg" 
-                                    alt="Photo of Vaibhav Kekan"
-                                    class="profile-img w-16 h-16 mx-auto rounded-full object-cover ring-2 ring-pink-500 mb-2"
-                                    onerror="this.onerror=null; this.src='https://placehold.co/64x64/ff47a6/0d011f?text=VK';"
-                                >
-                                <p class="font-bold">Vaibhav Kekan</p>
-                            </div>
-                            <!-- Minank Zanwar -->
-                            <div class="person-card">
-                                <img 
-                                    src="./images/Minank Zanwar.jpg" 
-                                    alt="Photo of Minank Zanwar"
-                                    class="profile-img w-16 h-16 mx-auto rounded-full object-cover ring-2 ring-pink-500 mb-2"
-                                    onerror="this.onerror=null; this.src='https://placehold.co/64x64/ff47a6/0d011f?text=MZ';"
-                                >
-                                <p class="font-bold">Minank Zanwar</p>
-                            </div>
-                            <!-- Prajwal Prince -->
-                            <div class="person-card">
-                                <img 
-                                    src="./images/Prajwal Prince.jpg" 
-                                    alt="Photo of Prajwal Prince"
-                                    class="profile-img w-16 h-16 mx-auto rounded-full object-cover ring-2 ring-pink-500 mb-2"
-                                    onerror="this.onerror=null; this.src='https://placehold.co/64x64/ff47a6/0d011f?text=PP';"
-                                >
-                                <p class="font-bold">Prajwal Prince</p>
-                            </div>
-                            <!-- Akhil Patel -->
-                            <div class="person-card">
-                                <img 
-                                    src="./images/Akhil Patel.jpg" 
-                                    alt="Photo of Akhil Patel"
-                                    class="profile-img w-16 h-16 mx-auto rounded-full object-cover ring-2 ring-pink-500 mb-2"
-                                    onerror="this.onerror=null; this.src='https://placehold.co/64x64/ff47a6/0d011f?text=AP';"
-                                >
-                                <p class="font-bold">Akhil Patel</p>
-                            </div>
+                        
+                        <div class="mystery-message">
+                            <p class="text-xl font-bold text-cyan-400 mb-2">🎉 IT'S A SURPRISE! 🎉</p>
+                            <p class="text-gray-400">The complete team roster and performer details will be revealed during the celebration. Get ready to be amazed by the hidden talents in our team!</p>
                         </div>
                     </div>
 
@@ -1485,8 +1358,8 @@
                             <tbody>
                                 <!-- PRE-EVENT & WELCOME -->
                                 <tr class="hover:bg-gray-700/50"><td data-label="Time" class="time-col">6:00 PM</td><td data-label="Duration">30 min</td><td data-label="Activity/Segment">Setup & Final Check</td><td data-label="Performer/Host">All Coordinators</td><td data-label="Description">AV: Test 3 mics and 2 music inputs. PROPS: Stage all game materials backstage. LIGHTS: Set Welcome/Ambient lighting scene.</td></tr>
-                                <tr class="hover:bg-gray-700/50"><td data-label="Time" class="time-col">6:30 PM</td><td data-label="Duration">15 min</td><td data-label="Activity/Segment">Guests Arrive / Mingle</td><td data-label="Performer/Host">Host: Ritika & Shivani</td><td data-label="Description">MUSIC: 'CEEF Warmup Mix'. Coordinators manage check-in and guide guests to seating/mingle areas.</td></tr>
-                                <tr class="hover:bg-gray-700/50"><td data-label="Time" class="time-col">6:45 PM</td><td data-label="Duration">10 min</td><td data-label="Activity/Segment">Welcome & Intro</td><td data-label="Performer/Host">Host: Ritika & Shivani</td><td data-label="Description">Official welcome and quick thank you to initial guests.</td></tr>
+                                <tr class="hover:bg-gray-700/50"><td data-label="Time" class="time-col">6:30 PM</td><td data-label="Duration">15 min</td><td data-label="Activity/Segment">Guests Arrive / Mingle</td><td data-label="Performer/Host">Host</td><td data-label="Description">MUSIC: 'CEEF Warmup Mix'. Coordinators manage check-in and guide guests to seating/mingle areas.</td></tr>
+                                <tr class="hover:bg-gray-700/50"><td data-label="Time" class="time-col">6:45 PM</td><td data-label="Duration">10 min</td><td data-label="Activity/Segment">Welcome & Intro</td><td data-label="Performer/Host">Host</td><td data-label="Description">Official welcome and quick thank you to initial guests.</td></tr>
                                 
                                 <!-- PERFORMANCES -->
                                 <tr class="hover:bg-gray-700/50"><td data-label="Time" class="time-col">6:55 PM</td><td data-label="Duration">10 min</td><td data-label="Activity/Segment">Performance 1: Solo Dance</td><td data-label="Performer/Host"><span class="surprise-performer">🎭 SURPRISE PERFORMER 1</span></td><td data-label="Description">MUSIC: Custom EDM Track 'Glow Up'. LIGHTING: Strobes/High-Energy.</td></tr>
@@ -1494,19 +1367,19 @@
                                 <tr class="hover:bg-gray-700/50"><td data-label="Time" class="time-col">7:15 PM</td><td data-label="Duration">10 min</td><td data-label="Activity/Segment">Performance 3: Solo Dance</td><td data-label="Performer/Host"><span class="surprise-performer">🎭 SURPRISE PERFORMER 3</span></td><td data-label="Description">MUSIC: Contemporary Pop. LIGHTING: Soft Pink/Cyan hues.</td></tr>
                                 <tr class="hover:bg-gray-700/50"><td data-label="Time" class="time-col">7:25 PM</td><td data-label="Duration">10 min</td><td data-label="Activity/Segment">Performance 4: Vocal Act</td><td data-label="Performer/Host"><span class="surprise-performer">🎤 SURPRISE VOCALIST</span></td><td data-label="Description">MIC: Guitar and Vocal mic check. MUSIC: Acoustic Track.</td></tr>
                                 
-                                <!-- ICEBREAKERS & GAME START -->
-                                <tr class="hover:bg-gray-700/50 bg-indigo-900/40"><td data-label="Time" class="time-col">7:35 PM</td><td data-label="Duration">10 min</td><td data-label="Activity/Segment"><span class="highlight-text">Icebreakers / Warm-up Activity</span></td><td data-label="Performer/Host">Host: Ritika & Shivani</td><td data-label="Description">Fast-paced "Guess the Movie, Song, Tagline of Brand." Keep audience involved and energized. Handheld mics back with Hosts.</td></tr>
+                                <!-- MYSTERY WARM-UP ACTIVITY -->
+                                <tr class="hover:bg-gray-700/50 bg-indigo-900/40"><td data-label="Time" class="time-col">7:35 PM</td><td data-label="Duration">10 min</td><td data-label="Activity/Segment"><span class="mystery-activity">🎯 MYSTERY WARM-UP</span></td><td data-label="Performer/Host">Host</td><td data-label="Description"><span class="surprise-text">🔥 Get ready to break the ice!</span> An exciting interactive challenge to energize everyone!</td></tr>
 
                                 <!-- GAMES BLOCK (7:45 PM - 8:50 PM) -->
-                                <tr class="hover:bg-gray-700/50 bg-green-900/40"><td data-label="Time" class="time-col">7:45 PM</td><td data-label="Duration">15 min</td><td data-label="Activity/Segment"><span class="game-title">GAME 1: Chinese Whispers Dance</span></td><td data-label="Performer/Host">Host: Shivani</td><td data-label="Description">SETUP: 3 teams, sealed cards, whiteboard. Pure fun activity - focus on team cooperation! <a href="https://www.youtube.com/shorts/5aGzzmE2ynw" target="_blank" class="text-cyan-400 underline">Demo Link</a></td></tr>
-                                <tr class="hover:bg-gray-700/50 bg-yellow-900/40"><td data-label="Time" class="time-col">8:00 PM</td><td data-label="Duration">5 min</td><td data-label="Activity/Segment"><span class="highlight-text">Intermission 1: Scavenger Hunt</span></td><td data-label="Performer/Host">Host: Ritika</td><td data-label="Description">Ask audience to bring random, common objects quickly. Fun interaction segment.</td></tr>
-                                <tr class="hover:bg-gray-700/50 bg-green-900/40"><td data-label="Time" class="time-col">8:05 PM</td><td data-label="Duration">15 min</td><td data-label="Activity/Segment"><span class="game-title">GAME 2: Head, Shoulder, Toe Challenge</span></td><td data-label="Performer/Host">Host: Ritika</td><td data-label="Description">One-on-one knockout style competition. <a href="https://youtu.be/CK_sWXbRS8Y" target="_blank" class="text-cyan-400 underline">Demo Link</a></td></tr>
-                                <tr class="hover:bg-gray-700/50 bg-yellow-900/40"><td data-label="Time" class="time-col">8:20 PM</td><td data-label="Duration">5 min</td><td data-label="Activity/Segment"><span class="highlight-text">Intermission 2: Scavenger Hunt</span></td><td data-label="Performer/Host">Host: Shivani</td><td data-label="Description">Keep segment fast to maintain game momentum.</td></tr>
-                                <tr class="hover:bg-gray-700/50 bg-green-900/40"><td data-label="Time" class="time-col">8:25 PM</td><td data-label="Duration">15 min</td><td data-label="Activity/Segment"><span class="game-title">GAME 3: The Balloon Race</span> <span class="activity-new">(NEW)</span></td><td data-label="Performer/Host">Host: Ritika</td><td data-label="Description">Coordinator must have inflated balloons ready. Exciting team competition!</td></tr>
-                                <tr class="hover:bg-gray-700/50 bg-yellow-900/40"><td data-label="Time" class="time-col">8:40 PM</td><td data-label="Duration">5 min</td><td data-label="Activity/Segment"><span class="highlight-text">Intermission 3: Scavenger Hunt</span></td><td data-label="Performer/Host">Host: Shivani</td><td data-label="Description">Final chance for audience participation.</td></tr>
+                                <tr class="hover:bg-gray-700/50 bg-green-900/40"><td data-label="Time" class="time-col">7:45 PM</td><td data-label="Duration">15 min</td><td data-label="Activity/Segment"><span class="mystery-game">🎲 MYSTERY GAME #1</span></td><td data-label="Performer/Host">Host</td><td data-label="Description"><span class="surprise-text">🌟 Interactive surprise challenge awaits!</span> Get ready for unexpected fun!</td></tr>
+                                <tr class="hover:bg-gray-700/50 bg-yellow-900/40"><td data-label="Time" class="time-col">8:00 PM</td><td data-label="Duration">5 min</td><td data-label="Activity/Segment"><span class="mystery-activity">🔍 MYSTERY ACTIVITY</span></td><td data-label="Performer/Host">Host</td><td data-label="Description"><span class="surprise-text">Surprise interaction with amazing prizes!</span></td></tr>
+                                <tr class="hover:bg-gray-700/50 bg-green-900/40"><td data-label="Time" class="time-col">8:05 PM</td><td data-label="Duration">15 min</td><td data-label="Activity/Segment"><span class="mystery-game">🎯 MYSTERY GAME #2</span></td><td data-label="Performer/Host">Host</td><td data-label="Description"><span class="surprise-text">🎊 Thrilling competition challenge!</span> Be prepared to participate!</td></tr>
+                                <tr class="hover:bg-gray-700/50 bg-yellow-900/40"><td data-label="Time" class="time-col">8:20 PM</td><td data-label="Duration">5 min</td><td data-label="Activity/Segment"><span class="mystery-activity">⭐ MYSTERY ACTIVITY</span></td><td data-label="Performer/Host">Host</td><td data-label="Description"><span class="surprise-text">Another exciting surprise awaits!</span></td></tr>
+                                <tr class="hover:bg-gray-700/50 bg-green-900/40"><td data-label="Time" class="time-col">8:25 PM</td><td data-label="Duration">15 min</td><td data-label="Activity/Segment"><span class="mystery-game">🎪 MYSTERY GAME #3</span> <span class="activity-new">(SPECIAL)</span></td><td data-label="Performer/Host">Host</td><td data-label="Description"><span class="surprise-text">🎈 Ultimate team challenge!</span> The most exciting game yet!</td></tr>
+                                <tr class="hover:bg-gray-700/50 bg-yellow-900/40"><td data-label="Time" class="time-col">8:40 PM</td><td data-label="Duration">5 min</td><td data-label="Activity/Segment"><span class="mystery-activity">🎁 FINAL SURPRISE</span></td><td data-label="Performer/Host">Host</td><td data-label="Description"><span class="surprise-text">The grand finale surprise activity!</span></td></tr>
 
                                 <!-- CLOSING SEQUENCE (Ramp Walk > Awards > Closing) -->
-                                <tr class="hover:bg-gray-700/50 bg-purple-900/40"><td data-label="Time" class="time-col">8:45 PM</td><td data-label="Duration">20 min</td><td data-label="Activity/Segment"><span class="highlight-text">Activity: CEEF Ramp Walk</span></td><td data-label="Performer/Host">Host: Ritika</td><td data-label="Description">Showcase your style! Confident ramp walk competition with awards for style, walk, and attire. Music: 'Runway Mix'.</td></tr>
+                                <tr class="hover:bg-gray-700/50 bg-purple-900/40"><td data-label="Time" class="time-col">8:45 PM</td><td data-label="Duration">20 min</td><td data-label="Activity/Segment"><span class="mystery-game">🌟 MYSTERY SHOWCASE</span></td><td data-label="Performer/Host">Host</td><td data-label="Description"><span class="surprise-text">✨ Ultimate confidence challenge!</span> Step into the spotlight for exclusive mystery awards!</td></tr>
                                 <tr class="hover:bg-gray-700/50"><td data-label="Time" class="time-col">9:05 PM</td><td data-label="Duration">15 min</td><td data-label="Activity/Segment">Awards Ceremony</td><td data-label="Performer/Host">Hosts & Leadership</td><td data-label="Description">Presenting all awards and recognition for the evening's activities and performances.</td></tr>
                                 <tr class="hover:bg-gray-700/50"><td data-label="Time" class="time-col">9:20 PM</td><td data-label="Duration">5 min</td><td data-label="Activity/Segment">Closing Speech & Thank You</td><td data-label="Performer/Host">Hosts & Leadership</td><td data-label="Description">Special thank you to all coordinators and volunteers. Announce dinner. MUSIC: Transition to 'Party Mix'.</td></tr>
                                 <tr class="hover:bg-gray-700/50 bg-emerald-900/40"><td data-label="Time" class="time-col">9:25 PM</td><td data-label="Duration">5 min</td><td data-label="Activity/Segment"><span class="coordinator-note">Coordinator Monitoring</span></td><td data-label="Performer/Host">All Coordinators</td><td data-label="Description">Coordinators monitor and coordinate event till end of ceremony. Monitor food stations and overall flow.</td></tr>
@@ -1515,116 +1388,155 @@
                         </table>
                     </div>
 
-                    <h4 class="text-xl font-bold text-cyan-400 mt-6 mb-4">🎲 Games & Activities Description</h4>
-                    <div class="grid md:grid-cols-2 gap-4 text-sm text-gray-300">
-                        <div class="p-3 bg-gray-900/40 rounded-lg border border-pink-400/30"><p class="font-bold text-pink-400"><i class="fas fa-users mr-1"></i> Chinese Whispers with Dance</p><p class="text-xs">The MC whispers a dance move/style to the first person. They must act/dance it out for the next person. The last person guesses the original move. (Materials: None)</p></div>
-                        <div class="p-3 bg-gray-900/40 rounded-lg border border-pink-400/30"><p class="font-bold text-pink-400"><i class="fas fa-head-side-mask mr-1"></i> Head, Shoulder, Toe Challenge</p><p class="text-xs">Teams race to grab a water bottle (placed a few feet away) only when the MC calls out "Bottle." (Materials: Water Bottles)</p></div>
-                        <div class="p-3 bg-gray-900/40 rounded-lg border border-pink-400/30"><p class="font-bold text-pink-400"><i class="fas fa-hand-holding-box mr-1"></i> The Balloon Relay</p><p class="text-xs">Team relay race where participants must jump-walk while handling or passing a balloon using only their feet. No hands allowed. (Materials: Balloons)</p></div>
-                        <div class="p-3 bg-gray-900/40 rounded-lg border border-pink-400/30"><p class="font-bold text-pink-400"><i class="fas fa-shoe-prints mr-1"></i> The CEEF Ramp Walk</p><p class="text-xs">Individuals or small groups are invited to walk the "ramp" and showcase their confidence and attire. (Materials: Good music track for a runway)</p></div>
+                    <h4 class="text-xl font-bold text-cyan-400 mt-6 mb-4">🎲 Games & Activities</h4>
+                    
+                    <!-- Mystery Games Section -->
+                    <div class="bg-gradient-to-br from-purple-900/30 via-pink-800/20 to-cyan-800/20 rounded-2xl p-8 border-2 border-dashed border-cyan-400/30 text-center mb-8">
+                        <div class="mb-6">
+                            <i class="fas fa-mask text-6xl text-purple-400 mystery-glow mb-4"></i>
+                            <h5 class="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400">
+                                Mystery Games & Activities
+                            </h5>
+                        </div>
+                        
+                        <p class="text-lg text-gray-300 mb-4">
+                            <span class="surprise-text">Prepare for the Unexpected!</span>
+                        </p>
+                        
+                        <p class="text-gray-400 mb-6">
+                            🎯 Interactive challenges await you<br/>
+                            🎪 Surprise activities throughout the evening<br/>
+                            🏆 Fun competitions with amazing prizes<br/>
+                            ✨ Memorable moments guaranteed
+                        </p>
+                        
+                        <!-- Mystery Game Cards -->
+                        <div class="grid md:grid-cols-2 gap-4 mt-6">
+                            <div class="mystery-card p-4 bg-gradient-to-br from-pink-900/40 to-purple-900/40 rounded-xl border border-pink-400/30">
+                                <div class="mb-3">
+                                    <i class="fas fa-question-circle text-2xl text-pink-400 mystery-glow"></i>
+                                </div>
+                                <h6 class="font-bold text-pink-400 mb-2">Surprise Challenge #1</h6>
+                                <p class="text-xs text-gray-400">Something exciting awaits...</p>
+                            </div>
+                            
+                            <div class="mystery-card p-4 bg-gradient-to-br from-cyan-900/40 to-blue-900/40 rounded-xl border border-cyan-400/30">
+                                <div class="mb-3">
+                                    <i class="fas fa-magic text-2xl text-cyan-400 mystery-glow"></i>
+                                </div>
+                                <h6 class="font-bold text-cyan-400 mb-2">Surprise Challenge #2</h6>
+                                <p class="text-xs text-gray-400">Get ready for the unexpected...</p>
+                            </div>
+                            
+                            <div class="mystery-card p-4 bg-gradient-to-br from-purple-900/40 to-indigo-900/40 rounded-xl border border-purple-400/30">
+                                <div class="mb-3">
+                                    <i class="fas fa-star text-2xl text-purple-400 mystery-glow"></i>
+                                </div>
+                                <h6 class="font-bold text-purple-400 mb-2">Surprise Challenge #3</h6>
+                                <p class="text-xs text-gray-400">Mystery awaits your participation...</p>
+                            </div>
+                            
+                            <div class="mystery-card p-4 bg-gradient-to-br from-emerald-900/40 to-teal-900/40 rounded-xl border border-emerald-400/30">
+                                <div class="mb-3">
+                                    <i class="fas fa-gift text-2xl text-emerald-400 mystery-glow"></i>
+                                </div>
+                                <h6 class="font-bold text-emerald-400 mb-2">Special Activity</h6>
+                                <p class="text-xs text-gray-400">The ultimate surprise experience...</p>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-6 text-sm text-gray-400 font-style: italic">
+                            <i class="fas fa-lock mr-2 text-yellow-400"></i>
+                            <span class="surprise-text">Details will be revealed during the event!</span>
+                        </div>
                     </div>
             
                     <h4 class="text-2xl font-bold text-center mb-6">
                         <i class="fas fa-runway text-pink-400 mr-3"></i>
-                        <span class="highlight-text">CEEF Ramp Walk Awards</span>
-                        <i class="fas fa-trophy text-cyan-400 ml-3"></i>
+                        <span class="highlight-text">✨ Mystery Awards ✨</span>
+                        <i class="fas fa-question-circle text-cyan-400 ml-3"></i>
                     </h4>
                     
                     <div class="text-center mb-8">
                         <p class="text-lg text-gray-300 mb-2"><span class="emphasis-text">Showcase your confidence and style!</span></p>
-                        <p class="text-sm text-gray-400">Walk the ramp and compete for these prestigious awards</p>
+                        <p class="text-sm text-gray-400">Walk the ramp and discover what amazing prizes await you</p>
                         <div class="h-1 w-32 bg-gradient-to-r from-pink-400 via-cyan-400 to-purple-400 mx-auto mt-4 rounded-full"></div>
                     </div>
                     
-                    <!-- Awards Grid - New Design -->
-                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-                        <!-- Style Queen Award -->
-                        <div class="relative overflow-hidden rounded-2xl bg-gradient-to-br from-pink-500/20 via-purple-600/20 to-pink-400/10 border-2 border-pink-400/40 shadow-2xl transform hover:scale-105 transition-all duration-300">
-                            <div class="absolute top-0 right-0 w-20 h-20 bg-pink-400/20 rounded-full -mr-10 -mt-10"></div>
-                            <div class="absolute bottom-0 left-0 w-16 h-16 bg-purple-500/20 rounded-full -ml-8 -mb-8"></div>
-                            <div class="relative p-6 text-center">
-                                <div class="mb-4">
-                                    <i class="fas fa-crown text-4xl text-pink-400 mb-2"></i>
-                                    <div class="w-12 h-1 bg-gradient-to-r from-pink-400 to-purple-500 mx-auto rounded-full"></div>
+                    <!-- Mystery Awards Section -->
+                    <div class="bg-gradient-to-br from-purple-900/30 via-pink-800/20 to-cyan-800/20 rounded-2xl p-8 border-2 border-dashed border-cyan-400/30 text-center mb-8">
+                        <div class="mb-6">
+                            <i class="fas fa-award text-6xl text-purple-400 mystery-glow mb-4"></i>
+                            <h5 class="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400">
+                                🏆 Prestigious Awards Await 🏆
+                            </h5>
+                        </div>
+                        
+                        <p class="text-lg text-gray-300 mb-4">
+                            <span class="surprise-text">Step onto the runway and compete for exclusive prizes!</span>
+                        </p>
+                        
+                        <p class="text-gray-400 mb-6">
+                            ✨ Multiple award categories<br/>
+                            🎯 Special recognition for outstanding style<br/>
+                            🌟 Exclusive prizes for top performers<br/>
+                            🏆 Memorable awards ceremony
+                        </p>
+                        
+                        <!-- Mystery Award Cards -->
+                        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mt-6">
+                            <div class="mystery-card p-4 bg-gradient-to-br from-pink-900/40 to-purple-900/40 rounded-xl border border-pink-400/30">
+                                <div class="mb-3">
+                                    <i class="fas fa-crown text-2xl text-pink-400 mystery-glow"></i>
                                 </div>
-                                <h5 class="text-lg font-bold text-pink-400 mb-2">The Zenith Diva</h5>
-                                <p class="text-sm text-purple-300 mb-3 font-semibold">Style Queen</p>
-                                <p class="text-xs text-gray-300 leading-relaxed">Overall most stylish, confident, and slaying female individual</p>
+                                <h6 class="font-bold text-pink-400 mb-2">👑 Royal Award</h6>
+                                <p class="text-xs text-gray-400">For the ultimate style royalty...</p>
+                            </div>
+                            
+                            <div class="mystery-card p-4 bg-gradient-to-br from-cyan-900/40 to-blue-900/40 rounded-xl border border-cyan-400/30">
+                                <div class="mb-3">
+                                    <i class="fas fa-star text-2xl text-cyan-400 mystery-glow"></i>
+                                </div>
+                                <h6 class="font-bold text-cyan-400 mb-2">⭐ Excellence Award</h6>
+                                <p class="text-xs text-gray-400">Outstanding performance recognition...</p>
+                            </div>
+                            
+                            <div class="mystery-card p-4 bg-gradient-to-br from-purple-900/40 to-indigo-900/40 rounded-xl border border-purple-400/30">
+                                <div class="mb-3">
+                                    <i class="fas fa-gem text-2xl text-purple-400 mystery-glow"></i>
+                                </div>
+                                <h6 class="font-bold text-purple-400 mb-2">💎 Elite Award</h6>
+                                <p class="text-xs text-gray-400">Special recognition awaits...</p>
+                            </div>
+                            
+                            <div class="mystery-card p-4 bg-gradient-to-br from-emerald-900/40 to-teal-900/40 rounded-xl border border-emerald-400/30">
+                                <div class="mb-3">
+                                    <i class="fas fa-trophy text-2xl text-emerald-400 mystery-glow"></i>
+                                </div>
+                                <h6 class="font-bold text-emerald-400 mb-2">🏆 Champion Award</h6>
+                                <p class="text-xs text-gray-400">For the ultimate runway champion...</p>
+                            </div>
+                            
+                            <div class="mystery-card p-4 bg-gradient-to-br from-orange-900/40 to-red-900/40 rounded-xl border border-orange-400/30">
+                                <div class="mb-3">
+                                    <i class="fas fa-medal text-2xl text-orange-400 mystery-glow"></i>
+                                </div>
+                                <h6 class="font-bold text-orange-400 mb-2">🥇 Prestige Award</h6>
+                                <p class="text-xs text-gray-400">Exclusive honor for excellence...</p>
+                            </div>
+                            
+                            <div class="mystery-card p-4 bg-gradient-to-br from-violet-900/40 to-pink-900/40 rounded-xl border border-violet-400/30">
+                                <div class="mb-3">
+                                    <i class="fas fa-sparkles text-2xl text-violet-400 mystery-glow"></i>
+                                </div>
+                                <h6 class="font-bold text-violet-400 mb-2">✨ Surprise Award</h6>
+                                <p class="text-xs text-gray-400">A special mystery awaits...</p>
                             </div>
                         </div>
-
-                        <!-- Style King Award -->
-                        <div class="relative overflow-hidden rounded-2xl bg-gradient-to-br from-cyan-500/20 via-blue-600/20 to-cyan-400/10 border-2 border-cyan-400/40 shadow-2xl transform hover:scale-105 transition-all duration-300">
-                            <div class="absolute top-0 right-0 w-20 h-20 bg-cyan-400/20 rounded-full -mr-10 -mt-10"></div>
-                            <div class="absolute bottom-0 left-0 w-16 h-16 bg-blue-500/20 rounded-full -ml-8 -mb-8"></div>
-                            <div class="relative p-6 text-center">
-                                <div class="mb-4">
-                                    <i class="fas fa-chess-king text-4xl text-cyan-400 mb-2"></i>
-                                    <div class="w-12 h-1 bg-gradient-to-r from-cyan-400 to-blue-500 mx-auto rounded-full"></div>
-                                </div>
-                                <h5 class="text-lg font-bold text-cyan-400 mb-2">The Zenith Duke</h5>
-                                <p class="text-sm text-blue-300 mb-3 font-semibold">Style King</p>
-                                <p class="text-xs text-gray-300 leading-relaxed">Overall most stylish, confident, and slaying male individual</p>
-                            </div>
-                        </div>
-
-                        <!-- Best Walk Female -->
-                        <div class="relative overflow-hidden rounded-2xl bg-gradient-to-br from-emerald-500/20 via-teal-600/20 to-emerald-400/10 border-2 border-emerald-400/40 shadow-2xl transform hover:scale-105 transition-all duration-300">
-                            <div class="absolute top-0 right-0 w-20 h-20 bg-emerald-400/20 rounded-full -mr-10 -mt-10"></div>
-                            <div class="absolute bottom-0 left-0 w-16 h-16 bg-teal-500/20 rounded-full -ml-8 -mb-8"></div>
-                            <div class="relative p-6 text-center">
-                                <div class="mb-4">
-                                    <i class="fas fa-walking text-4xl text-emerald-400 mb-2"></i>
-                                    <div class="w-12 h-1 bg-gradient-to-r from-emerald-400 to-teal-500 mx-auto rounded-full"></div>
-                                </div>
-                                <h5 class="text-lg font-bold text-emerald-400 mb-2">The Runway Virtuosa</h5>
-                                <p class="text-sm text-teal-300 mb-3 font-semibold">Best Walk Female</p>
-                                <p class="text-xs text-gray-300 leading-relaxed">Most confident, fluid, and captivating female ramp performance</p>
-                            </div>
-                        </div>
-
-                        <!-- Best Walk Male -->
-                        <div class="relative overflow-hidden rounded-2xl bg-gradient-to-br from-orange-500/20 via-red-600/20 to-orange-400/10 border-2 border-orange-400/40 shadow-2xl transform hover:scale-105 transition-all duration-300">
-                            <div class="absolute top-0 right-0 w-20 h-20 bg-orange-400/20 rounded-full -mr-10 -mt-10"></div>
-                            <div class="absolute bottom-0 left-0 w-16 h-16 bg-red-500/20 rounded-full -ml-8 -mb-8"></div>
-                            <div class="relative p-6 text-center">
-                                <div class="mb-4">
-                                    <i class="fas fa-male text-4xl text-orange-400 mb-2"></i>
-                                    <div class="w-12 h-1 bg-gradient-to-r from-orange-400 to-red-500 mx-auto rounded-full"></div>
-                                </div>
-                                <h5 class="text-lg font-bold text-orange-400 mb-2">The Runway Maestro</h5>
-                                <p class="text-sm text-red-300 mb-3 font-semibold">Best Walk Male</p>
-                                <p class="text-xs text-gray-300 leading-relaxed">Most confident, fluid, and captivating male ramp performance</p>
-                            </div>
-                        </div>
-
-                        <!-- Best Attire Female -->
-                        <div class="relative overflow-hidden rounded-2xl bg-gradient-to-br from-violet-500/20 via-purple-600/20 to-violet-400/10 border-2 border-violet-400/40 shadow-2xl transform hover:scale-105 transition-all duration-300">
-                            <div class="absolute top-0 right-0 w-20 h-20 bg-violet-400/20 rounded-full -mr-10 -mt-10"></div>
-                            <div class="absolute bottom-0 left-0 w-16 h-16 bg-purple-500/20 rounded-full -ml-8 -mb-8"></div>
-                            <div class="relative p-6 text-center">
-                                <div class="mb-4">
-                                    <i class="fas fa-tshirt text-4xl text-violet-400 mb-2"></i>
-                                    <div class="w-12 h-1 bg-gradient-to-r from-violet-400 to-purple-500 mx-auto rounded-full"></div>
-                                </div>
-                                <h5 class="text-lg font-bold text-violet-400 mb-2">The Crest Fashionista</h5>
-                                <p class="text-sm text-purple-300 mb-3 font-semibold">Best Attire Female</p>
-                                <p class="text-xs text-gray-300 leading-relaxed">Most creative, unique, and well-put-together female attire</p>
-                            </div>
-                        </div>
-
-                        <!-- Best Attire Male -->
-                        <div class="relative overflow-hidden rounded-2xl bg-gradient-to-br from-indigo-500/20 via-blue-700/20 to-indigo-400/10 border-2 border-indigo-400/40 shadow-2xl transform hover:scale-105 transition-all duration-300">
-                            <div class="absolute top-0 right-0 w-20 h-20 bg-indigo-400/20 rounded-full -mr-10 -mt-10"></div>
-                            <div class="absolute bottom-0 left-0 w-16 h-16 bg-blue-500/20 rounded-full -ml-8 -mb-8"></div>
-                            <div class="relative p-6 text-center">
-                                <div class="mb-4">
-                                    <i class="fas fa-user-tie text-4xl text-indigo-400 mb-2"></i>
-                                    <div class="w-12 h-1 bg-gradient-to-r from-indigo-400 to-blue-500 mx-auto rounded-full"></div>
-                                </div>
-                                <h5 class="text-lg font-bold text-indigo-400 mb-2">The Crest Dapper</h5>
-                                <p class="text-sm text-blue-300 mb-3 font-semibold">Best Attire Male</p>
-                                <p class="text-xs text-gray-300 leading-relaxed">Most creative, unique, and well-put-together male attire</p>
-                            </div>
+                        
+                        <div class="mt-6 text-sm text-gray-400 font-style: italic">
+                            <i class="fas fa-lock mr-2 text-yellow-400"></i>
+                            <span class="surprise-text">Award details will be revealed during the ceremony!</span>
                         </div>
                     </div>
 
