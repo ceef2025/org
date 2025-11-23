@@ -232,119 +232,852 @@
             background: linear-gradient(45deg, #ff70b3, var(--neon-pink));
         }
 
-        /* Host Login Button (New) */
-        #host-login-btn {
-            position: fixed;
-            top: 1rem;
-            right: 1rem;
-            background-color: rgba(20, 247, 255, 0.2);
-            border: 1px solid var(--neon-cyan);
-            box-shadow: 0 0 10px var(--glow-cyan);
-            color: var(--neon-cyan);
-            z-index: 10;
-            transition: background-color 0.3s;
-        }
-        #host-login-btn:hover {
-            background-color: rgba(20, 247, 255, 0.4);
-            box-shadow: 0 0 15px var(--neon-cyan);
-        }
-
-        /* Modal Styles (New) */
-        .modal-overlay {
+        /* Enhanced Navigation Bar Styles */
+        .navbar {
             position: fixed;
             top: 0;
             left: 0;
+            right: 0;
+            background: linear-gradient(135deg, rgba(13, 1, 31, 0.95), rgba(26, 3, 59, 0.95));
+            backdrop-filter: blur(15px) saturate(180%);
+            border-bottom: 2px solid transparent;
+            border-image: linear-gradient(90deg, var(--neon-pink), var(--neon-cyan), var(--neon-pink)) 1;
+            box-shadow: 
+                0 4px 25px rgba(255, 71, 166, 0.25),
+                0 8px 40px rgba(0, 0, 0, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            z-index: 50;
+            padding: 1rem 0;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .navbar.scrolled {
+            padding: 0.75rem 0;
+            box-shadow: 
+                0 6px 35px rgba(255, 71, 166, 0.4),
+                0 12px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+            position: relative;
+        }
+
+        .nav-container::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, 
+                transparent 0%, 
+                var(--neon-cyan) 25%, 
+                var(--neon-pink) 50%, 
+                var(--neon-cyan) 75%, 
+                transparent 100%);
+            opacity: 0.6;
+            animation: pulse-line 4s ease-in-out infinite;
+        }
+
+        @keyframes pulse-line {
+            0%, 100% { opacity: 0.3; transform: scaleX(0.8); }
+            50% { opacity: 0.8; transform: scaleX(1); }
+        }
+
+        .nav-logo {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, var(--neon-pink), var(--neon-cyan), var(--neon-pink));
+            background-size: 200% 200%;
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: var(--neon-pink);
+            text-shadow: 0 0 15px var(--glow-pink);
+            text-decoration: none;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            animation: gradient-shift 3s ease-in-out infinite;
+        }
+
+        @keyframes gradient-shift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .nav-logo:hover {
+            transform: scale(1.08) rotate(1deg);
+            text-shadow: 
+                0 0 20px var(--glow-pink), 
+                0 0 40px rgba(255, 71, 166, 0.4),
+                0 0 60px rgba(20, 247, 255, 0.3);
+            animation-duration: 1s;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--light-text);
+            text-decoration: none;
+            font-weight: 600;
+            padding: 0.75rem 1.25rem;
+            border-radius: 30px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+        }
+
+        .nav-links a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
-            display: none; /* Hidden by default */
-            align-items: center;
-            justify-content: center;
-            z-index: 50;
+            background: linear-gradient(90deg, transparent, rgba(20, 247, 255, 0.3), transparent);
+            transition: left 0.6s ease;
         }
-        .modal-content {
-            background: radial-gradient(circle at top, #1a033b 0%, var(--dark-bg) 100%);
-            border: 2px solid var(--neon-pink);
-            box-shadow: 0 0 40px rgba(255, 71, 166, 0.5);
-            padding: 2rem;
-            border-radius: 1rem;
-            width: 90%;
-            max-width: 400px;
-            animation: fadeIn 0.3s ease-out;
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--neon-pink), var(--neon-cyan));
+            transition: all 0.4s ease;
+            transform: translateX(-50%);
         }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: scale(0.9); }
-            to { opacity: 1; transform: scale(1); }
+
+        .nav-links a:hover::before {
+            left: 100%;
         }
-        .error-message {
+
+        .nav-links a:hover::after {
+            width: 80%;
+        }
+
+        .nav-links a:hover {
             color: var(--neon-cyan);
-            text-shadow: 0 0 5px rgba(20, 247, 255, 0.3);
+            background: linear-gradient(135deg, rgba(20, 247, 255, 0.15), rgba(255, 71, 166, 0.1));
+            box-shadow: 
+                0 0 20px rgba(20, 247, 255, 0.4),
+                0 8px 25px rgba(0, 0, 0, 0.3);
+            transform: translateY(-3px) scale(1.02);
+            border-color: rgba(20, 247, 255, 0.4);
+            text-shadow: 0 0 10px rgba(20, 247, 255, 0.5);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: linear-gradient(135deg, rgba(20, 247, 255, 0.1), rgba(20, 247, 255, 0.05));
+            border: 2px solid rgba(20, 247, 255, 0.3);
+            color: var(--neon-cyan);
+            font-size: 1.4rem;
+            cursor: pointer;
+            padding: 0.6rem;
+            border-radius: 12px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+
+        .mobile-menu-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(20, 247, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .mobile-menu-btn:hover::before {
+            left: 100%;
+        }
+
+        .mobile-menu-btn:hover {
+            background: linear-gradient(135deg, rgba(20, 247, 255, 0.2), rgba(20, 247, 255, 0.1));
+            border-color: rgba(20, 247, 255, 0.5);
+            box-shadow: 
+                0 0 20px rgba(20, 247, 255, 0.4),
+                0 8px 25px rgba(0, 0, 0, 0.3);
+            transform: scale(1.08) rotate(90deg);
+            text-shadow: 0 0 10px rgba(20, 247, 255, 0.7);
+        }
+
+        /* Enhanced Mobile Navigation */
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: linear-gradient(135deg, rgba(13, 1, 31, 0.98), rgba(26, 3, 59, 0.98));
+                backdrop-filter: blur(15px);
+                flex-direction: column;
+                gap: 0;
+                padding: 2rem 1rem;
+                border-top: 2px solid rgba(255, 71, 166, 0.5);
+                box-shadow: 0 10px 40px rgba(0, 0, 0, 0.7);
+                transform: translateY(-100%);
+                transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+                opacity: 0;
+                visibility: hidden;
+                z-index: 45;
+            }
+
+            .nav-links.active {
+                transform: translateY(0);
+                opacity: 1;
+                visibility: visible;
+            }
+
+            .nav-links li {
+                width: 100%;
+                margin: 0.5rem 0;
+            }
+
+            .nav-links a {
+                display: block;
+                padding: 1rem 1.5rem;
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                border-radius: 0.75rem;
+                text-align: center;
+                font-size: 1.1rem;
+                background: rgba(255, 255, 255, 0.03);
+                transition: all 0.3s ease;
+            }
+
+            .nav-links a:hover {
+                background: rgba(20, 247, 255, 0.15);
+                border-color: rgba(20, 247, 255, 0.4);
+                transform: translateX(8px);
+            }
+
+            .mobile-menu-btn {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 45px;
+                height: 45px;
+                border-radius: 12px;
+                background: linear-gradient(135deg, rgba(20, 247, 255, 0.1), rgba(20, 247, 255, 0.05));
+                border: 2px solid rgba(20, 247, 255, 0.3);
+                color: var(--neon-cyan);
+                font-size: 1.4rem;
+                cursor: pointer;
+                padding: 0.6rem;
+                transition: all 0.4s ease;
+            }
+
+            .mobile-menu-btn:hover {
+                background: rgba(20, 247, 255, 0.2);
+                transform: scale(1.05);
+            }
+
+            .nav-container {
+                padding: 0 1rem;
+            }
+
+
+        }
+
+        /* Tablet responsive improvements */
+        @media (max-width: 1024px) and (min-width: 769px) {
+            .nav-links {
+                gap: 1rem;
+            }
+            
+            .nav-links a {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.9rem;
+            }
+        }
+
+
+
+        /* Fix heading visibility with navbar */
+        body {
+            padding-top: 100px;
+        }
+
+        /* Enhanced text styling to replace formatting */
+        .highlight-text {
+            font-weight: 800;
+            color: var(--neon-cyan);
+            text-shadow: 0 0 5px var(--glow-cyan);
+        }
+
+        .emphasis-text {
+            font-weight: 700;
+            color: var(--neon-pink);
+            font-size: 1.1em;
+            text-shadow: 0 0 3px var(--glow-pink);
+        }
+
+        .game-title {
+            font-weight: 900;
+            font-size: 1.2em;
+            color: var(--neon-cyan);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .coordinator-note {
+            font-weight: 600;
+            color: #ffd700;
+            background: rgba(255, 215, 0, 0.1);
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+            border-left: 3px solid #ffd700;
+        }
+
+        .activity-new {
+            background: linear-gradient(45deg, rgba(20, 247, 255, 0.2), rgba(255, 71, 166, 0.1));
+            border: 1px solid rgba(20, 247, 255, 0.3);
+            border-radius: 0.5rem;
+            padding: 0.3rem 0.6rem;
+            font-weight: 700;
+        }
+
+        /* Enhanced schedule table styling */
+        .schedule-table .time-col {
+            font-weight: bold;
+            color: var(--neon-pink);
+        }
+
+        /* Enhanced Mobile Styles for navbar */
+        @media (max-width: 768px) {
+            body {
+                padding-top: 90px;
+            }
+        }
+
+        @media (max-width: 640px) {
+            body {
+                padding-top: 85px;
+            }
+            
+            .hero-section {
+                margin-top: 1rem;
+            }
+        }
+
+
+
+        /* Enhanced Responsive Design */
+        .hero-section {
+            background: linear-gradient(135deg, rgba(255, 71, 166, 0.1) 0%, rgba(20, 247, 255, 0.1) 100%);
+            border-radius: 2rem;
+            padding: 3rem 2rem;
+            margin-bottom: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 71, 166, 0.1) 0%, transparent 70%);
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 0.6; transform: scale(1.1); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Enhanced Cards with better spacing */
+        .detail-card {
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
+            padding: 2rem 1.5rem;
+            border-radius: 1rem;
+            box-shadow: 
+                0 8px 25px rgba(255, 71, 166, 0.15),
+                0 0 0 1px rgba(255, 255, 255, 0.1);
+            border: 1px solid transparent;
+            background-clip: padding-box;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .detail-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(20, 247, 255, 0.1), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .detail-card:hover::before {
+            left: 100%;
+        }
+
+        .detail-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 
+                0 20px 40px rgba(255, 71, 166, 0.25),
+                0 0 0 1px rgba(20, 247, 255, 0.3);
+            border-color: rgba(20, 247, 255, 0.5);
+        }
+
+        /* Improved section spacing and layout */
+        .content-section {
+            margin: 2rem 0;
+        }
+
+        .grid-enhanced {
+            gap: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .grid-enhanced {
+                gap: 1.5rem;
+            }
+            
+            .hero-section {
+                padding: 2rem 1rem;
+                border-radius: 1rem;
+            }
+            
+            .detail-card {
+                padding: 1.5rem 1rem;
+            }
+        }
+
+        /* Enhanced accordion with better animations */
+        .accordion-item {
+            margin-bottom: 0.75rem;
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: 0 0 25px rgba(20, 247, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.03), rgba(0, 0, 0, 0.2));
+        }
+
+        .accordion-header {
+            background: linear-gradient(135deg, rgba(20, 247, 255, 0.1), rgba(255, 71, 166, 0.05));
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .accordion-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(20, 247, 255, 0.2), transparent);
+            transition: left 0.8s ease;
+        }
+
+        .accordion-header:hover::before {
+            left: 100%;
+        }
+
+        .accordion-header:hover {
+            background: linear-gradient(135deg, rgba(20, 247, 255, 0.15), rgba(255, 71, 166, 0.1));
+            transform: scale(1.01);
         }
 
         /* Footer */
         .main-footer {
+            background: linear-gradient(135deg, rgba(13, 1, 31, 0.9), rgba(26, 3, 59, 0.9));
             text-align: center;
-            padding: 2rem 0;
+            padding: 3rem 2rem;
             font-size: 1.25rem;
             font-weight: 700;
             color: var(--light-text);
             text-shadow: 0 0 5px var(--neon-pink), 0 0 15px rgba(255, 71, 166, 0.5);
             border-top: 1px solid rgba(255, 255, 255, 0.1);
             margin-top: 4rem;
+            position: relative;
+        }
+
+        .main-footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--neon-pink), var(--neon-cyan), var(--neon-pink));
+            animation: shimmer 3s infinite linear;
+        }
+
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+
+        /* Enhanced Button Styles */
+        #confirm-btn {
+            background: linear-gradient(45deg, var(--neon-pink), #ff70b3);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 
+                0 0 20px var(--neon-pink),
+                0 10px 30px rgba(255, 71, 166, 0.3);
+            border: 1px solid #ffffff;
+            text-shadow: 1px 1px 3px #111;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #confirm-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.6s ease;
+        }
+
+        #confirm-btn:hover::before {
+            left: 100%;
+        }
+
+        #confirm-btn:hover {
+            box-shadow: 
+                0 0 40px var(--neon-pink), 
+                0 0 20px #fff,
+                0 15px 40px rgba(255, 71, 166, 0.4);
+            transform: translateY(-5px) scale(1.05);
+            background: linear-gradient(45deg, #ff70b3, var(--neon-pink));
+        }
+
+        /* Enhanced Mobile Responsive Design */
+        @media (max-width: 640px) {
+            .navbar {
+                padding: 0.75rem 0;
+            }
+            
+            .navbar.scrolled {
+                padding: 0.5rem 0;
+            }
+            
+            .container {
+                padding: 1rem 0.75rem;
+            }
+            
+            .content-section {
+                margin: 1.5rem 0;
+            }
+            
+            .accordion-item {
+                margin-bottom: 0.5rem;
+            }
+            
+            .hero-section {
+                padding: 2rem 1rem;
+                margin-bottom: 2rem;
+                border-radius: 1rem;
+            }
+            
+            .event-title {
+                font-size: 2.5rem !important;
+                line-height: 1.1;
+                margin-bottom: 1rem;
+            }
+            
+            .event-subtitle {
+                font-size: 1.25rem !important;
+                margin-bottom: 1rem;
+            }
+            
+            .detail-card {
+                padding: 1.5rem 1rem;
+                border-radius: 0.75rem;
+            }
+            
+            .detail-card i {
+                font-size: 2.5rem !important;
+                margin-bottom: 0.75rem;
+            }
+            
+            .accordion-header {
+                padding: 1rem 0.75rem;
+                flex-direction: column;
+                gap: 0.5rem;
+                text-align: center;
+            }
+            
+            .accordion-header span {
+                font-size: 1rem;
+                order: 1;
+            }
+            
+            .accordion-icon {
+                order: 2;
+                align-self: center;
+            }
+            
+            .grid-enhanced {
+                gap: 1rem;
+            }
+            
+            .person-card {
+                padding: 0.75rem 0.5rem;
+            }
+            
+            .person-card .profile-img {
+                width: 3rem;
+                height: 3rem;
+            }
+            
+            .person-card p {
+                font-size: 0.8rem;
+            }
+            
+            #countdown {
+                gap: 0.5rem;
+            }
+            
+            #countdown .value {
+                font-size: 1.5rem;
+            }
+            
+            #confirm-btn {
+                padding: 0.75rem 1.5rem;
+                font-size: 1rem;
+            }
+        }
+
+        /* Extra small devices */
+        @media (max-width: 480px) {
+            .hero-section {
+                padding: 1.5rem 0.75rem;
+            }
+            
+            .event-title {
+                font-size: 2rem !important;
+            }
+            
+            .detail-card {
+                padding: 1rem 0.75rem;
+            }
+            
+            .accordion-content {
+                padding: 1rem;
+            }
+            
+            .grid-enhanced {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Enhanced Mobile Menu Animation */
+        .mobile-menu-btn i {
+            transform-origin: center;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .mobile-menu-btn.active i.fa-bars {
+            transform: rotate(90deg);
+            opacity: 0;
+        }
+
+        .mobile-menu-btn.active i.fa-times {
+            transform: rotate(0deg);
+            opacity: 1;
+        }
+
+        .mobile-menu-btn i.fa-times {
+            transform: rotate(-90deg);
+            opacity: 0;
+            position: absolute;
+        }
+
+        /* Awards Tier Styling */
+        .tier-card {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tier-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .tier-card:hover::before {
+            left: 100%;
+        }
+
+        .tier-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Enhanced Responsive Tables */
+        @media (max-width: 768px) {
+            .schedule-table td {
+                font-size: 0.85rem;
+                padding: 0.5rem;
+            }
+            
+            .schedule-table td::before {
+                font-size: 0.75rem;
+                padding-left: 8px;
+                width: 45%;
+            }
+        }
+
+        /* Smooth animations for better UX */
+        * {
+            scroll-behavior: smooth;
+        }
+        
+        .accordion-content {
+            transition: max-height 0.8s cubic-bezier(0.4, 0, 0.2, 1), 
+                       padding 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Enhanced card hover effects */
+        .person-card:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 8px 20px rgba(255, 71, 166, 0.25);
+        }
+
+        .person-card .profile-img {
+            transition: all 0.3s ease;
+        }
+
+        .person-card:hover .profile-img {
+            transform: scale(1.1);
+            box-shadow: 
+                0 0 15px var(--glow-cyan), 
+                0 0 10px var(--neon-pink),
+                0 5px 15px rgba(0, 0, 0, 0.3);
         }
 
     </style>
 </head>
 <body class="selection:bg-pink-700 selection:text-white">
 
-    <!-- Host Login Button (Top Right) -->
-    <button id="host-login-btn" class="py-2 px-4 rounded-full font-semibold text-sm">
-        <i class="fas fa-lock mr-2"></i> Host Login
-    </button>
+    <!-- Enhanced Navigation Bar -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#home" class="nav-logo">CEEF 2025</a>
+            
+            <ul class="nav-links" id="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#details">Event Details</a></li>
+                <li><a href="#dresscode">Dress Code</a></li>
+                <li><a href="#team">Our Team</a></li>
+                <li><a href="#schedule">Schedule</a></li>
+                <li><a href="#awards">Awards & Ramp Walk</a></li>
+                <li><a href="host.html">Host Dashboard</a></li>
+            </ul>
+            
+            <button class="mobile-menu-btn" id="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-times" style="display: none;"></i>
+            </button>
+        </div>
+    </nav>
     
-    <div class="container">
+    <div class="container" id="home">
         
-        <p class="intro-text text-center font-bold">Good Morning! ☀️ Get ready for the party!</p>
+        <!-- Enhanced Hero Section -->
+        <section class="hero-section">
+            <div class="hero-content">
+                <p class="intro-text text-center font-bold text-lg md:text-xl mb-6">Good Morning! ☀️ Get ready for the party!</p>
 
-        <!-- HEADER SECTION -->
-        <header class="main-header text-center">
-            <p class="ceef-year uppercase tracking-wider text-xl">CEEF 2025</p>
-            <h1 class="event-title text-center text-7xl">The Crest Revelry</h1>
-            <h2 class="event-subtitle text-center text-2xl">Annual Team Celebration</h2>
-            <p class="text-gray-300 mt-4 max-w-2xl mx-auto">A dazzling evening of connection, talent showcase, and well-deserved recognition for our collective achievements.</p>
-        </header>
+                <!-- HEADER SECTION -->
+                <header class="main-header text-center">
+                    <p class="ceef-year uppercase tracking-wider text-xl md:text-2xl mb-4">CEEF 2025</p>
+                    <h1 class="event-title text-center text-4xl md:text-6xl lg:text-7xl mb-4">The Crest Revelry</h1>
+                    <h2 class="event-subtitle text-center text-xl md:text-2xl lg:text-3xl mb-6">Annual Team Celebration</h2>
+                    <p class="text-gray-300 mt-4 max-w-3xl mx-auto text-base md:text-lg leading-relaxed">A dazzling evening of connection, talent showcase, and well-deserved recognition for our collective achievements. Join us for an unforgettable night of celebration!</p>
+                </header>
+            </div>
+        </section>
 
         <!-- CORE DETAILS: DATE, VENUE, TIME -->
-        <section class="grid md:grid-cols-3 gap-6 mb-12 text-center">
-            <div class="detail-card">
-                <i class="fas fa-calendar-alt text-3xl text-pink-400 mb-2"></i>
-                <p class="font-bold text-lg">Date</p>
-                <p class="text-cyan-400 text-xl">Thursday, 27th November</p>
-            </div>
-            <div class="detail-card">
-                <i class="fas fa-map-marker-alt text-3xl text-pink-400 mb-2"></i>
-                <p class="font-bold text-lg">Venue</p>
-                <p class="text-cyan-400 text-xl">Akasa Pool & Kitchen Bar</p>
-                <a href="#" class="text-sm text-pink-500 hover:text-pink-300 transition duration-150 underline">View Location</a>
-            </div>
-            <div class="detail-card">
-                <i class="fas fa-clock text-3xl text-pink-400 mb-2"></i>
-                <p class="font-bold text-lg">Time</p>
-                <p class="text-cyan-400 text-xl">6:30 PM – 10:30 PM</p>
+        <section id="details" class="content-section">
+            <div class="grid grid-cols-1 md:grid-cols-3 grid-enhanced text-center">
+                <div class="detail-card">
+                    <div class="relative z-10">
+                        <i class="fas fa-calendar-alt text-4xl text-pink-400 mb-4 drop-shadow-lg"></i>
+                        <p class="font-bold text-xl mb-2">Date</p>
+                        <p class="text-cyan-400 text-xl md:text-2xl font-semibold">Thursday, 27th November</p>
+                        <div class="mt-3 h-1 w-16 bg-gradient-to-r from-pink-400 to-cyan-400 mx-auto rounded-full"></div>
+                    </div>
+                </div>
+                <div class="detail-card">
+                    <div class="relative z-10">
+                        <i class="fas fa-map-marker-alt text-4xl text-pink-400 mb-4 drop-shadow-lg"></i>
+                        <p class="font-bold text-xl mb-2">Venue</p>
+                        <p class="text-cyan-400 text-xl md:text-2xl font-semibold mb-2">Akasa Pool & Kitchen Bar</p>
+                        <a href="#" class="inline-block text-sm text-pink-400 hover:text-pink-300 transition-all duration-300 underline hover:no-underline bg-pink-400/10 px-3 py-1 rounded-full hover:bg-pink-400/20">View Location</a>
+                        <div class="mt-3 h-1 w-16 bg-gradient-to-r from-pink-400 to-cyan-400 mx-auto rounded-full"></div>
+                    </div>
+                </div>
+                <div class="detail-card">
+                    <div class="relative z-10">
+                        <i class="fas fa-clock text-4xl text-pink-400 mb-4 drop-shadow-lg"></i>
+                        <p class="font-bold text-xl mb-2">Time</p>
+                        <p class="text-cyan-400 text-xl md:text-2xl font-semibold">6:30 PM – 10:30 PM</p>
+                        <div class="mt-3 h-1 w-16 bg-gradient-to-r from-pink-400 to-cyan-400 mx-auto rounded-full"></div>
+                    </div>
+                </div>
             </div>
         </section>
 
         <!-- ACCORDION 1: DRESSCODE -->
-        <div class="accordion-item" id="item-dresscode">
-            <div class="accordion-header p-5 flex justify-between items-center rounded-t-lg">
-                <span class="text-xl tracking-wider uppercase">
-                    <i class="fas fa-mask text-pink-400 mr-3"></i> Dresscode: Blaze and Glaze
-                </span>
-                <i class="fas fa-chevron-down accordion-icon"></i>
-            </div>
+        <section id="dresscode">
+            <div class="accordion-item" id="item-dresscode">
+                <div class="accordion-header p-6 flex justify-between items-center rounded-t-lg relative z-10">
+                    <span class="text-xl md:text-2xl tracking-wider uppercase font-bold">
+                        <i class="fas fa-mask text-pink-400 mr-3 text-2xl"></i> Dresscode: Blaze and Glaze
+                    </span>
+                    <i class="fas fa-chevron-down accordion-icon text-xl"></i>
+                </div>
             <div class="accordion-content">
                 <div class="py-4">
-                    <p class="text-sm text-gray-400 text-center mb-6 max-w-lg mx-auto">Fire Meets Shine - come blazing, leave amazing!!! The most dazzling look wins the **"Best Dressed Blaze Star"** award.</p>
+                    <p class="text-sm text-gray-400 text-center mb-6 max-w-lg mx-auto">Fire Meets Shine - come blazing, leave amazing!!! The most dazzling look wins the <span class="highlight-text">"Best Dressed Blaze Star"</span> award.</p>
                     
                     <div class="grid md:grid-cols-2 gap-8 text-left px-2">
                         <!-- GENTS SECTION -->
@@ -371,15 +1104,18 @@
                 </div>
             </div>
         </div>
+            </div>
+        </section>
         
         <!-- ACCORDION 2: TEAMS & PERFORMERS - Section Renamed -->
-        <div class="accordion-item" id="item-teams">
-            <div class="accordion-header p-5 flex justify-between items-center">
-                <span class="text-xl tracking-wider uppercase">
-                    <i class="fas fa-users-viewfinder text-pink-400 mr-3"></i> The CEEF Team
-                </span>
-                <i class="fas fa-chevron-down accordion-icon"></i>
-            </div>
+        <section id="team" class="content-section">
+            <div class="accordion-item" id="item-teams">
+                <div class="accordion-header p-6 flex justify-between items-center relative z-10">
+                    <span class="text-xl md:text-2xl tracking-wider uppercase font-bold">
+                        <i class="fas fa-users-viewfinder text-pink-400 mr-3 text-2xl"></i> The CEEF Team
+                    </span>
+                    <i class="fas fa-chevron-down accordion-icon text-xl"></i>
+                </div>
             <div class="accordion-content">
                 <div class="py-4 space-y-8">
                     
@@ -401,7 +1137,7 @@
                             <!-- Shivani Mhaisekar -->
                             <div class="person-card col-span-1">
                                 <img 
-                                    src="./images/Shivani Mhaisekar.png" 
+                                    src="./images/Shivani Mhaisekar.jpg" 
                                     alt="Photo of Shivani Mhaisekar"
                                     class="profile-img w-20 h-20 mx-auto rounded-full object-cover ring-2 ring-pink-500 mb-2"
                                     onerror="this.onerror=null; this.src='https://placehold.co/80x80/ff47a6/ffffff?text=SM';"
@@ -419,7 +1155,7 @@
                             <!-- Ritesh Rokade -->
                             <div class="person-card">
                                 <img 
-                                    src="./image/Ritesh Rokade.jpg" 
+                                    src="./images/Ritesh Rokade.jpg" 
                                     alt="Photo of Ritesh Rokade"
                                     class="profile-img w-20 h-20 mx-auto rounded-full object-cover ring-2 ring-pink-500 mb-2"
                                     onerror="this.onerror=null; this.src='https://placehold.co/80x80/ff47a6/ffffff?text=RR';"
@@ -430,7 +1166,7 @@
                             <!-- Suraj Mane -->
                             <div class="person-card">
                                 <img 
-                                    src="./image/Suraj Mane.jpg" 
+                                    src="./images/Suraj Mane.jpg" 
                                     alt="Photo of Suraj Mane"
                                     class="profile-img w-20 h-20 mx-auto rounded-full object-cover ring-2 ring-pink-500 mb-2"
                                     onerror="this.onerror=null; this.src='https://placehold.co/80x80/ff47a6/ffffff?text=SM';"
@@ -441,7 +1177,7 @@
                             <!-- Vishwanath Mane -->
                             <div class="person-card">
                                 <img 
-                                    src="./image/Vishwanath Mane.jpg" 
+                                    src="./images/Vishwanath Mane.jpg" 
                                     alt="Photo of Vishwanath Mane"
                                     class="profile-img w-20 h-20 mx-auto rounded-full object-cover ring-2 ring-pink-500 mb-2"
                                     onerror="this.onerror=null; this.src='https://placehold.co/80x80/ff47a6/ffffff?text=VM';"
@@ -452,7 +1188,7 @@
                             <!-- Anuja Pansare -->
                             <div class="person-card">
                                 <img 
-                                    src="./image/Anuja Pansare.jpg" 
+                                    src="./images/Anuja Pansare.jpg" 
                                     alt="Photo of Anuja Pansare"
                                     class="profile-img w-20 h-20 mx-auto rounded-full object-cover ring-2 ring-pink-500 mb-2"
                                     onerror="this.onerror=null; this.src='https://placehold.co/80x80/ff47a6/ffffff?text=AP';"
@@ -470,7 +1206,7 @@
                             <!-- Vidyasagar Mundada -->
                             <div class="person-card">
                                 <img 
-                                    src="./image/Vidyasagar Mundada.jpg" 
+                                    src="./images/Vidyasagar Mundada.jpg" 
                                     alt="Photo of Vidyasagar Mundada"
                                     class="profile-img w-16 h-16 mx-auto rounded-full object-cover ring-2 ring-cyan-500 mb-2"
                                     onerror="this.onerror=null; this.src='https://placehold.co/64x64/14f7ff/0d011f?text=VM';"
@@ -480,7 +1216,7 @@
                             <!-- Digamber Ranjane -->
                             <div class="person-card">
                                 <img 
-                                    src="./image/Digamber Ranjane.jpg" 
+                                    src="./images/Digamber Ranjane.jpg" 
                                     alt="Photo of Digamber Ranjane"
                                     class="profile-img w-16 h-16 mx-auto rounded-full object-cover ring-2 ring-cyan-500 mb-2"
                                     onerror="this.onerror=null; this.src='https://placehold.co/64x64/14f7ff/0d011f?text=DR';"
@@ -490,7 +1226,7 @@
                             <!-- Naveen Pal -->
                             <div class="person-card">
                                 <img 
-                                    src="./image/Naveen Pal.jpg" 
+                                    src="./images/Naveen Pal.jpg" 
                                     alt="Photo of Naveen Pal"
                                     class="profile-img w-16 h-16 mx-auto rounded-full object-cover ring-2 ring-cyan-500 mb-2"
                                     onerror="this.onerror=null; this.src='https://placehold.co/64x64/14f7ff/0d011f?text=NP';"
@@ -500,7 +1236,7 @@
                             <!-- Kishalaya Bhattacharjee -->
                             <div class="person-card">
                                 <img 
-                                    src="./image/Kishalaya Bhattacharjee.jpg" 
+                                    src="./images/Kishalaya Bhattacharjee.jpg" 
                                     alt="Photo of Kishalaya Bhattacharjee"
                                     class="profile-img w-16 h-16 mx-auto rounded-full object-cover ring-2 ring-cyan-500 mb-2"
                                     onerror="this.onerror=null; this.src='https://placehold.co/64x64/14f7ff/0d011f?text=KB';"
@@ -510,7 +1246,7 @@
                             <!-- Gayatri Patil -->
                             <div class="person-card">
                                 <img 
-                                    src="./image/Gayatri Patil.jpg" 
+                                    src="./images/Gayatri Patil.jpg" 
                                     alt="Photo of Gayatri Patil"
                                     class="profile-img w-16 h-16 mx-auto rounded-full object-cover ring-2 ring-cyan-500 mb-2"
                                     onerror="this.onerror=null; this.src='https://placehold.co/64x64/14f7ff/0d011f?text=GP';"
@@ -520,7 +1256,7 @@
                             <!-- Neeta Bhujbal -->
                             <div class="person-card">
                                 <img 
-                                    src="./image/Neeta Bhujbal.jpg" 
+                                    src="./images/Neeta Bhujbal.jpg" 
                                     alt="Photo of Neeta Bhujbal"
                                     class="profile-img w-16 h-16 mx-auto rounded-full object-cover ring-2 ring-cyan-500 mb-2"
                                     onerror="this.onerror=null; this.src='https://placehold.co/64x64/14f7ff/0d011f?text=NB';"
@@ -530,7 +1266,7 @@
                             <!-- Sayali Jadhav -->
                             <div class="person-card">
                                 <img 
-                                    src="./image/Sayali Jadhav.jpg" 
+                                    src="./images/Sayali Jadhav.jpg" 
                                     alt="Photo of Sayali Jadhav"
                                     class="profile-img w-16 h-16 mx-auto rounded-full object-cover ring-2 ring-cyan-500 mb-2"
                                     onerror="this.onerror=null; this.src='https://placehold.co/64x64/14f7ff/0d011f?text=SJ';"
@@ -540,7 +1276,7 @@
                             <!-- Kunal Pawar -->
                             <div class="person-card">
                                 <img 
-                                    src="./image/Kunal Pawar.jpg" 
+                                    src="./images/Kunal Pawar.jpg" 
                                     alt="Photo of Kunal Pawar"
                                     class="profile-img w-16 h-16 mx-auto rounded-full object-cover ring-2 ring-cyan-500 mb-2"
                                     onerror="this.onerror=null; this.src='https://placehold.co/64x64/14f7ff/0d011f?text=KP';"
@@ -557,7 +1293,7 @@
                             <!-- Nitesh Khandelwal -->
                             <div class="person-card">
                                 <img 
-                                    src="./image/Nitesh Khandelwal.jpg" 
+                                    src="./images/Nitesh Khandelwal.jpg" 
                                     alt="Photo of Nitesh Khandelwal"
                                     class="profile-img w-16 h-16 mx-auto rounded-full object-cover ring-2 ring-pink-500 mb-2"
                                     onerror="this.onerror=null; this.src='https://placehold.co/64x64/ff47a6/0d011f?text=NK';"
@@ -567,7 +1303,7 @@
                             <!-- Aniket Shivane -->
                             <div class="person-card">
                                 <img 
-                                    src="./image/Aniket Shivane.jpg" 
+                                    src="./images/Aniket Shivane.jpg" 
                                     alt="Photo of Aniket Shivane"
                                     class="profile-img w-16 h-16 mx-auto rounded-full object-cover ring-2 ring-pink-500 mb-2"
                                     onerror="this.onerror=null; this.src='https://placehold.co/64x64/ff47a6/0d011f?text=AS';"
@@ -577,7 +1313,7 @@
                             <!-- Harshada Kadam -->
                             <div class="person-card">
                                 <img 
-                                    src="./image/Harshada Kadam.jpg" 
+                                    src="./images/Harshada Kadam.jpg" 
                                     alt="Photo of Harshada Kadam"
                                     class="profile-img w-16 h-16 mx-auto rounded-full object-cover ring-2 ring-pink-500 mb-2"
                                     onerror="this.onerror=null; this.src='https://placehold.co/64x64/ff47a6/0d011f?text=HK';"
@@ -587,7 +1323,7 @@
                             <!-- Rishabh Das -->
                             <div class="person-card">
                                 <img 
-                                    src="./image/Rishabh Das.jpg" 
+                                    src="./images/Rishabh Das.jpg" 
                                     alt="Photo of Rishabh Das"
                                     class="profile-img w-16 h-16 mx-auto rounded-full object-cover ring-2 ring-pink-500 mb-2"
                                     onerror="this.onerror=null; this.src='https://placehold.co/64x64/ff47a6/0d011f?text=RD';"
@@ -597,7 +1333,7 @@
                             <!-- Ram Dhanure -->
                             <div class="person-card">
                                 <img 
-                                    src="./image/Ram Dhanure.jpg" 
+                                    src="./images/Ram Dhanure.jpg" 
                                     alt="Photo of Ram Dhanure"
                                     class="profile-img w-16 h-16 mx-auto rounded-full object-cover ring-2 ring-pink-500 mb-2"
                                     onerror="this.onerror=null; this.src='https://placehold.co/64x64/ff47a6/0d011f?text=RD';"
@@ -607,7 +1343,7 @@
                             <!-- Samarth Gayakhe -->
                             <div class="person-card">
                                 <img 
-                                    src="./image/Samarth Gayakhe.jpg" 
+                                    src="./images/Samarth Gayakhe.jpg" 
                                     alt="Photo of Samarth Gayakhe"
                                     class="profile-img w-16 h-16 mx-auto rounded-full object-cover ring-2 ring-pink-500 mb-2"
                                     onerror="this.onerror=null; this.src='https://placehold.co/64x64/ff47a6/0d011f?text=SG';"
@@ -617,7 +1353,7 @@
                             <!-- Vaibhav Kekan -->
                             <div class="person-card">
                                 <img 
-                                    src="./image/Vaibhav Kekan.jpg" 
+                                    src="./images/Vaibhav Kekan.jpg" 
                                     alt="Photo of Vaibhav Kekan"
                                     class="profile-img w-16 h-16 mx-auto rounded-full object-cover ring-2 ring-pink-500 mb-2"
                                     onerror="this.onerror=null; this.src='https://placehold.co/64x64/ff47a6/0d011f?text=VK';"
@@ -627,7 +1363,7 @@
                             <!-- Minank Zanwar -->
                             <div class="person-card">
                                 <img 
-                                    src="./image/Minank Zanwar.jpg" 
+                                    src="./images/Minank Zanwar.jpg" 
                                     alt="Photo of Minank Zanwar"
                                     class="profile-img w-16 h-16 mx-auto rounded-full object-cover ring-2 ring-pink-500 mb-2"
                                     onerror="this.onerror=null; this.src='https://placehold.co/64x64/ff47a6/0d011f?text=MZ';"
@@ -637,7 +1373,7 @@
                             <!-- Prajwal Prince -->
                             <div class="person-card">
                                 <img 
-                                    src="./image/Prajwal Prince.jpg" 
+                                    src="./images/Prajwal Prince.jpg" 
                                     alt="Photo of Prajwal Prince"
                                     class="profile-img w-16 h-16 mx-auto rounded-full object-cover ring-2 ring-pink-500 mb-2"
                                     onerror="this.onerror=null; this.src='https://placehold.co/64x64/ff47a6/0d011f?text=PP';"
@@ -647,7 +1383,7 @@
                             <!-- Akhil Patel -->
                             <div class="person-card">
                                 <img 
-                                    src="./image/Akhil Patel.jpg" 
+                                    src="./images/Akhil Patel.jpg" 
                                     alt="Photo of Akhil Patel"
                                     class="profile-img w-16 h-16 mx-auto rounded-full object-cover ring-2 ring-pink-500 mb-2"
                                     onerror="this.onerror=null; this.src='https://placehold.co/64x64/ff47a6/0d011f?text=AP';"
@@ -662,13 +1398,14 @@
         </div>
 
         <!-- ACCORDION 3: EVENT PLAN -->
-        <div class="accordion-item" id="item-eventplan">
-            <div class="accordion-header p-5 flex justify-between items-center">
-                <span class="text-xl tracking-wider uppercase">
-                    <i class="fas fa-calendar-check text-pink-400 mr-3"></i> The CEEF Spotlight : Event Plan
-                </span>
-                <i class="fas fa-chevron-down accordion-icon"></i>
-            </div>
+        <section id="awards" class="content-section">
+            <div class="accordion-item" id="item-eventplan">
+                <div class="accordion-header p-6 flex justify-between items-center relative z-10">
+                    <span class="text-xl md:text-2xl tracking-wider uppercase font-bold">
+                        <i class="fas fa-calendar-check text-pink-400 mr-3 text-2xl"></i> The CEEF Spotlight : Event Plan
+                    </span>
+                    <i class="fas fa-chevron-down accordion-icon text-xl"></i>
+                </div>
             <div class="accordion-content">
                 <div class="py-4 space-y-8">
                     
@@ -678,28 +1415,46 @@
                     </p>
 
                     <h4 class="text-xl font-bold text-cyan-400 mb-4">🗓️ Detailed Event Schedule</h4>
-                    <div class="overflow-x-auto rounded-lg">
-                        <table class="w-full text-sm schedule-table bg-gray-800/40">
+                    <div class="overflow-x-auto rounded-lg shadow-2xl">
+                        <table class="w-full text-sm schedule-table bg-gray-800/60">
                             <thead>
                                 <tr>
-                                    <th class="w-1/6">Time</th>
-                                    <th class="w-1/6">Activity</th>
-                                    <th class="w-2/5">Description</th>
-                                    <th class="w-1/4 hidden md:table-cell">MC Notes</th>
+                                    <th class="w-[10%]">Time</th>
+                                    <th class="w-[10%]">Duration</th>
+                                    <th class="w-[25%]">Activity/Segment</th>
+                                    <th class="w-[20%]">Performer/Host</th>
+                                    <th class="w-[35%]">Description</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr><td data-label="Time">6:00 PM</td><td data-label="Activity">Coordinator Time</td><td data-label="Description">Final check of AV, lighting, seating, and performance readiness.</td><td data-label="MC Notes" class="hidden md:table-cell text-xs text-gray-500">Sound system check. Microphones ready.</td></tr>
-                                <tr><td data-label="Time">6:00 - 6:30 PM</td><td data-label="Activity">Event Setup & Mingle</td><td data-label="Description">Music starts playing. Attendees begin to arrive and mingle.</td><td data-label="MC Notes" class="hidden md:table-cell text-xs text-gray-500">Ensure props for games are ready.</td></tr>
-                                <tr><td data-label="Time">6:30 PM</td><td data-label="Activity">Welcome & Opening</td><td data-label="Description">MC takes the stage, officially welcomes everyone and sets the high-energy tone.</td><td data-label="MC Notes" class="hidden md:table-cell text-xs text-gray-500">Start on time. Brief and exciting.</td></tr>
-                                <tr><td data-label="Time">6:35 PM</td><td data-label="Activity">Performance Block 1</td><td data-label="Description">Dance Performance #1</td><td data-label="MC Notes" class="hidden md:table-cell text-xs text-gray-500">Icebreaker Question #1 immediately follows.</td></tr>
-                                <tr><td data-label="Time">6:55 PM</td><td data-label="Activity">Performance Block 3</td><td data-label="Description">Dance Performance #2</td><td data-label="MC Notes" class="hidden md:table-cell text-xs text-gray-500">Icebreaker Question #3 immediately follows.</td></tr>
-                                <tr><td data-label="Time">7:15 PM</td><td data-label="Activity">Performance Block 5</td><td data-label="Description">Dance Performance #3 (Finale)</td><td data-label="MC Notes" class="hidden md:table-cell text-xs text-gray-500">Icebreaker Question #5 immediately follows.</td></tr>
-                                <tr><td data-label="Time">7:25 PM</td><td data-label="Activity">Quick Icebreakers</td><td data-label="Description">A rapid-fire round of 3-5 high-energy icebreaker questions.</td><td data-label="MC Notes" class="hidden md:table-cell text-xs text-gray-500">Keep this segment fast-paced.</td></tr>
-                                <tr><td data-label="Time">7:35 - 8:30 PM</td><td data-label="Activity">The CEEF Challenge Games</td><td data-label="Description">Start of group games for high-energy involvement.</td><td data-label="MC Notes" class="hidden md:table-cell text-xs text-gray-500">Allocate 15-20 minutes per game.</td></tr>
-                                <tr><td data-label="Time">8:30 PM</td><td data-label="Activity">Award Ceremony Prep</td><td data-label="Description">Short break for final winner tally for the awards.</td><td data-label="MC Notes" class="hidden md:table-cell text-xs text-gray-500">Judges finalize choices. MC prepares gifts.</td></tr>
-                                <tr><td data-label="Time">8:40 PM</td><td data-label="Activity">The CEEF Recognition Awards</td><td data-label="Description">Announcement and presentation of all 9 fun and recognition awards.</td><td data-label="MC Notes" class="hidden md:table-cell text-xs text-gray-500">Ensure award winners are present.</td></tr>
-                                <tr><td data-label="Time">9:00 PM</td><td data-label="Activity">Closing Remarks</td><td data-label="Description">MC delivers a big thank thank you to all. Final announcement/call to action.</td><td data-label="MC Notes" class="hidden md:table-cell text-xs text-gray-500">End on an enthusiastic note.</td></tr>
+                                <!-- PRE-EVENT & WELCOME -->
+                                <tr class="hover:bg-gray-700/50"><td data-label="Time" class="time-col">6:00 PM</td><td data-label="Duration">30 min</td><td data-label="Activity/Segment">Setup & Final Check</td><td data-label="Performer/Host">All Coordinators</td><td data-label="Description">AV: Test 3 mics and 2 music inputs. PROPS: Stage all game materials backstage. LIGHTS: Set Welcome/Ambient lighting scene.</td></tr>
+                                <tr class="hover:bg-gray-700/50"><td data-label="Time" class="time-col">6:30 PM</td><td data-label="Duration">15 min</td><td data-label="Activity/Segment">Guests Arrive / Mingle</td><td data-label="Performer/Host">Host: Ritika & Shivani</td><td data-label="Description">MUSIC: 'CEEF Warmup Mix'. Coordinators manage check-in and guide guests to seating/mingle areas.</td></tr>
+                                <tr class="hover:bg-gray-700/50"><td data-label="Time" class="time-col">6:45 PM</td><td data-label="Duration">10 min</td><td data-label="Activity/Segment">Welcome & Intro</td><td data-label="Performer/Host">Host: Ritika & Shivani</td><td data-label="Description">Official welcome and quick thank you to initial guests.</td></tr>
+                                
+                                <!-- PERFORMANCES -->
+                                <tr class="hover:bg-gray-700/50"><td data-label="Time" class="time-col">6:55 PM</td><td data-label="Duration">10 min</td><td data-label="Activity/Segment">Performance 1: Solo Dance</td><td data-label="Performer/Host">Vishwanath Mane</td><td data-label="Description">MUSIC: Custom EDM Track 'Glow Up'. LIGHTING: Strobes/High-Energy.</td></tr>
+                                <tr class="hover:bg-gray-700/50"><td data-label="Time" class="time-col">7:05 PM</td><td data-label="Duration">10 min</td><td data-label="Activity/Segment">Performance 2: Solo Dance</td><td data-label="Performer/Host">Suraj Mane</td><td data-label="Description">MUSIC: High-tempo Bollywood. LIGHTING: Red/Gold wash.</td></tr>
+                                <tr class="hover:bg-gray-700/50"><td data-label="Time" class="time-col">7:15 PM</td><td data-label="Duration">10 min</td><td data-label="Activity/Segment">Performance 3: Solo Dance</td><td data-label="Performer/Host">Anuja Pansare</td><td data-label="Description">MUSIC: Contemporary Pop. LIGHTING: Soft Pink/Cyan hues.</td></tr>
+                                <tr class="hover:bg-gray-700/50"><td data-label="Time" class="time-col">7:25 PM</td><td data-label="Duration">10 min</td><td data-label="Activity/Segment">Performance 4: Vocal Act</td><td data-label="Performer/Host">Ritesh Rokade</td><td data-label="Description">MIC: Guitar and Vocal mic check. MUSIC: Acoustic Track.</td></tr>
+                                
+                                <!-- ICEBREAKERS & GAME START -->
+                                <tr class="hover:bg-gray-700/50 bg-indigo-900/40"><td data-label="Time" class="time-col">7:35 PM</td><td data-label="Duration">10 min</td><td data-label="Activity/Segment"><span class="highlight-text">Icebreakers / Warm-up Activity</span></td><td data-label="Performer/Host">Host: Ritika & Shivani</td><td data-label="Description">Fast-paced "Guess the Movie, Song, Tagline of Brand." Keep audience involved and energized. Handheld mics back with Hosts.</td></tr>
+
+                                <!-- GAMES BLOCK (7:45 PM - 8:50 PM) -->
+                                <tr class="hover:bg-gray-700/50 bg-green-900/40"><td data-label="Time" class="time-col">7:45 PM</td><td data-label="Duration">15 min</td><td data-label="Activity/Segment"><span class="game-title">GAME 1: Chinese Whispers Dance</span></td><td data-label="Performer/Host">Host: Shivani</td><td data-label="Description">SETUP: 3 teams, sealed cards, whiteboard. Pure fun activity - focus on team cooperation! <a href="https://www.youtube.com/shorts/5aGzzmE2ynw" target="_blank" class="text-cyan-400 underline">Demo Link</a></td></tr>
+                                <tr class="hover:bg-gray-700/50 bg-yellow-900/40"><td data-label="Time" class="time-col">8:00 PM</td><td data-label="Duration">5 min</td><td data-label="Activity/Segment"><span class="highlight-text">Intermission 1: Scavenger Hunt</span></td><td data-label="Performer/Host">Host: Ritika</td><td data-label="Description">Ask audience to bring random, common objects quickly. Fun interaction segment.</td></tr>
+                                <tr class="hover:bg-gray-700/50 bg-green-900/40"><td data-label="Time" class="time-col">8:05 PM</td><td data-label="Duration">15 min</td><td data-label="Activity/Segment"><span class="game-title">GAME 2: Head, Shoulder, Toe Challenge</span></td><td data-label="Performer/Host">Host: Ritika</td><td data-label="Description">One-on-one knockout style competition. <a href="https://youtu.be/CK_sWXbRS8Y" target="_blank" class="text-cyan-400 underline">Demo Link</a></td></tr>
+                                <tr class="hover:bg-gray-700/50 bg-yellow-900/40"><td data-label="Time" class="time-col">8:20 PM</td><td data-label="Duration">5 min</td><td data-label="Activity/Segment"><span class="highlight-text">Intermission 2: Scavenger Hunt</span></td><td data-label="Performer/Host">Host: Shivani</td><td data-label="Description">Keep segment fast to maintain game momentum.</td></tr>
+                                <tr class="hover:bg-gray-700/50 bg-green-900/40"><td data-label="Time" class="time-col">8:25 PM</td><td data-label="Duration">15 min</td><td data-label="Activity/Segment"><span class="game-title">GAME 3: The Balloon Race</span> <span class="activity-new">(NEW)</span></td><td data-label="Performer/Host">Host: Ritika</td><td data-label="Description">Coordinator must have inflated balloons ready. Exciting team competition!</td></tr>
+                                <tr class="hover:bg-gray-700/50 bg-yellow-900/40"><td data-label="Time" class="time-col">8:40 PM</td><td data-label="Duration">5 min</td><td data-label="Activity/Segment"><span class="highlight-text">Intermission 3: Scavenger Hunt</span></td><td data-label="Performer/Host">Host: Shivani</td><td data-label="Description">Final chance for audience participation.</td></tr>
+
+                                <!-- CLOSING SEQUENCE (Ramp Walk > Awards > Closing) -->
+                                <tr class="hover:bg-gray-700/50 bg-purple-900/40"><td data-label="Time" class="time-col">8:45 PM</td><td data-label="Duration">20 min</td><td data-label="Activity/Segment"><span class="highlight-text">Activity: CEEF Ramp Walk</span></td><td data-label="Performer/Host">Host: Ritika</td><td data-label="Description">Showcase your style! Confident ramp walk competition with awards for style, walk, and attire. Music: 'Runway Mix'.</td></tr>
+                                <tr class="hover:bg-gray-700/50"><td data-label="Time" class="time-col">9:05 PM</td><td data-label="Duration">15 min</td><td data-label="Activity/Segment">Awards Ceremony</td><td data-label="Performer/Host">Hosts & Leadership</td><td data-label="Description">Presenting all awards and recognition for the evening's activities and performances.</td></tr>
+                                <tr class="hover:bg-gray-700/50"><td data-label="Time" class="time-col">9:20 PM</td><td data-label="Duration">5 min</td><td data-label="Activity/Segment">Closing Speech & Thank You</td><td data-label="Performer/Host">Hosts & Leadership</td><td data-label="Description">Special thank you to all coordinators and volunteers. Announce dinner. MUSIC: Transition to 'Party Mix'.</td></tr>
+                                <tr class="hover:bg-gray-700/50 bg-emerald-900/40"><td data-label="Time" class="time-col">9:25 PM</td><td data-label="Duration">5 min</td><td data-label="Activity/Segment"><span class="coordinator-note">Coordinator Monitoring</span></td><td data-label="Performer/Host">All Coordinators</td><td data-label="Description">Coordinators monitor and coordinate event till end of ceremony. Monitor food stations and overall flow.</td></tr>
+                                <tr class="hover:bg-gray-700/50 bg-amber-900/40"><td data-label="Time" class="time-col">9:30 PM</td><td data-label="Duration">60+ min</td><td data-label="Activity/Segment"><span class="emphasis-text" style="font-size: 1.3em; color: #ffd700;">Now We Enjoy Dinner!</span></td><td data-label="Performer/Host">Everyone</td><td data-label="Description"><span class="emphasis-text">Team celebration time!</span> Dinner service begins. Background music continues. All team members can now relax and enjoy the evening together.</td></tr>
                             </tbody>
                         </table>
                     </div>
@@ -712,29 +1467,117 @@
                         <div class="p-3 bg-gray-900/40 rounded-lg border border-pink-400/30"><p class="font-bold text-pink-400"><i class="fas fa-shoe-prints mr-1"></i> The CEEF Ramp Walk</p><p class="text-xs">Individuals or small groups are invited to walk the "ramp" and showcase their confidence and attire. (Materials: Good music track for a runway)</p></div>
                     </div>
             
-                    <h4 class="text-xl font-bold text-cyan-400 mt-6 mb-4">🏆 CEEF Recognition Awards</h4>
-                    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 text-sm">
-                        <div class="p-3 detail-card bg-gray-900/40"><p class="font-bold text-pink-400">The Vogue Visionary</p><p class="text-xs text-gray-400">Best Attire (Male & Female). For the most stylish, innovative, and impressive outfits.</p></div>
-                        <div class="p-3 detail-card bg-gray-900/40"><p class="font-bold text-pink-400">The Chronos Captain</p><p class="text-xs text-gray-400">Best EMP (On time/Log off time). Recognizes punctuality and work-life balance.</p></div>
-                        <div class="p-3 detail-card bg-gray-900/40"><p class="font-bold text-pink-400">The Cipher Scribe</p><p class="text-xs text-gray-400">Writing Slang on Mail. Honors the master of creative slang in official emails.</p></div>
-                        <div class="p-3 detail-card bg-gray-900/40"><p class="font-bold text-pink-400">The Echo Maestro</p><p class="text-xs text-gray-400">Common Dialog in Call. Celebrates the colleague whose signature phrase is the team's catchphrase.</p></div>
-                        <div class="p-3 detail-card bg-gray-900/40"><p class="font-bold text-pink-400">The Grand Duchess</p><p class="text-xs text-gray-400">Miss Eve. The most elegant, graceful, and charming female presence.</p></div>
-                        <div class="p-3 detail-card bg-gray-900/40"><p class="font-bold text-pink-400">The Melodic Muse</p><p class="text-xs text-gray-400">Miss Nightingale. Celebrates the person with the most captivating singing talent.</p></div>
-                        <div class="p-3 detail-card bg-gray-900/40"><p class="font-bold text-pink-400">The Dynamo Star</p><p class="text-xs text-gray-400">Most Energetic Folk. Awarded to the person whose sheer enthusiasm lifts the entire room.</p></div>
-                        <div class="p-3 detail-card bg-gray-900/40"><p class="font-bold text-pink-400">The Verbal Virtuoso</p><p class="text-xs text-gray-400">Most Talkative. Honors the person who always has a fascinating story or witty remark.</p></div>
-                        <div class="p-3 detail-card bg-gray-900/40"><p class="font-bold text-pink-400">The Movement Monarch</p><p class="text-xs text-gray-400">BEST Dancer. Recognizes the most outstanding dancer of the night.</p></div>
+                    <h4 class="text-2xl font-bold text-center mb-6">
+                        <i class="fas fa-runway text-pink-400 mr-3"></i>
+                        <span class="highlight-text">CEEF Ramp Walk Awards</span>
+                        <i class="fas fa-trophy text-cyan-400 ml-3"></i>
+                    </h4>
+                    
+                    <div class="text-center mb-8">
+                        <p class="text-lg text-gray-300 mb-2"><span class="emphasis-text">Showcase your confidence and style!</span></p>
+                        <p class="text-sm text-gray-400">Walk the ramp and compete for these prestigious awards</p>
+                        <div class="h-1 w-32 bg-gradient-to-r from-pink-400 via-cyan-400 to-purple-400 mx-auto mt-4 rounded-full"></div>
+                    </div>
+                    
+                    <!-- Awards Grid - New Design -->
+                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+                        <!-- Style Queen Award -->
+                        <div class="relative overflow-hidden rounded-2xl bg-gradient-to-br from-pink-500/20 via-purple-600/20 to-pink-400/10 border-2 border-pink-400/40 shadow-2xl transform hover:scale-105 transition-all duration-300">
+                            <div class="absolute top-0 right-0 w-20 h-20 bg-pink-400/20 rounded-full -mr-10 -mt-10"></div>
+                            <div class="absolute bottom-0 left-0 w-16 h-16 bg-purple-500/20 rounded-full -ml-8 -mb-8"></div>
+                            <div class="relative p-6 text-center">
+                                <div class="mb-4">
+                                    <i class="fas fa-crown text-4xl text-pink-400 mb-2"></i>
+                                    <div class="w-12 h-1 bg-gradient-to-r from-pink-400 to-purple-500 mx-auto rounded-full"></div>
+                                </div>
+                                <h5 class="text-lg font-bold text-pink-400 mb-2">The Zenith Diva</h5>
+                                <p class="text-sm text-purple-300 mb-3 font-semibold">Style Queen</p>
+                                <p class="text-xs text-gray-300 leading-relaxed">Overall most stylish, confident, and slaying female individual</p>
+                            </div>
+                        </div>
+
+                        <!-- Style King Award -->
+                        <div class="relative overflow-hidden rounded-2xl bg-gradient-to-br from-cyan-500/20 via-blue-600/20 to-cyan-400/10 border-2 border-cyan-400/40 shadow-2xl transform hover:scale-105 transition-all duration-300">
+                            <div class="absolute top-0 right-0 w-20 h-20 bg-cyan-400/20 rounded-full -mr-10 -mt-10"></div>
+                            <div class="absolute bottom-0 left-0 w-16 h-16 bg-blue-500/20 rounded-full -ml-8 -mb-8"></div>
+                            <div class="relative p-6 text-center">
+                                <div class="mb-4">
+                                    <i class="fas fa-chess-king text-4xl text-cyan-400 mb-2"></i>
+                                    <div class="w-12 h-1 bg-gradient-to-r from-cyan-400 to-blue-500 mx-auto rounded-full"></div>
+                                </div>
+                                <h5 class="text-lg font-bold text-cyan-400 mb-2">The Zenith Duke</h5>
+                                <p class="text-sm text-blue-300 mb-3 font-semibold">Style King</p>
+                                <p class="text-xs text-gray-300 leading-relaxed">Overall most stylish, confident, and slaying male individual</p>
+                            </div>
+                        </div>
+
+                        <!-- Best Walk Female -->
+                        <div class="relative overflow-hidden rounded-2xl bg-gradient-to-br from-emerald-500/20 via-teal-600/20 to-emerald-400/10 border-2 border-emerald-400/40 shadow-2xl transform hover:scale-105 transition-all duration-300">
+                            <div class="absolute top-0 right-0 w-20 h-20 bg-emerald-400/20 rounded-full -mr-10 -mt-10"></div>
+                            <div class="absolute bottom-0 left-0 w-16 h-16 bg-teal-500/20 rounded-full -ml-8 -mb-8"></div>
+                            <div class="relative p-6 text-center">
+                                <div class="mb-4">
+                                    <i class="fas fa-walking text-4xl text-emerald-400 mb-2"></i>
+                                    <div class="w-12 h-1 bg-gradient-to-r from-emerald-400 to-teal-500 mx-auto rounded-full"></div>
+                                </div>
+                                <h5 class="text-lg font-bold text-emerald-400 mb-2">The Runway Virtuosa</h5>
+                                <p class="text-sm text-teal-300 mb-3 font-semibold">Best Walk Female</p>
+                                <p class="text-xs text-gray-300 leading-relaxed">Most confident, fluid, and captivating female ramp performance</p>
+                            </div>
+                        </div>
+
+                        <!-- Best Walk Male -->
+                        <div class="relative overflow-hidden rounded-2xl bg-gradient-to-br from-orange-500/20 via-red-600/20 to-orange-400/10 border-2 border-orange-400/40 shadow-2xl transform hover:scale-105 transition-all duration-300">
+                            <div class="absolute top-0 right-0 w-20 h-20 bg-orange-400/20 rounded-full -mr-10 -mt-10"></div>
+                            <div class="absolute bottom-0 left-0 w-16 h-16 bg-red-500/20 rounded-full -ml-8 -mb-8"></div>
+                            <div class="relative p-6 text-center">
+                                <div class="mb-4">
+                                    <i class="fas fa-male text-4xl text-orange-400 mb-2"></i>
+                                    <div class="w-12 h-1 bg-gradient-to-r from-orange-400 to-red-500 mx-auto rounded-full"></div>
+                                </div>
+                                <h5 class="text-lg font-bold text-orange-400 mb-2">The Runway Maestro</h5>
+                                <p class="text-sm text-red-300 mb-3 font-semibold">Best Walk Male</p>
+                                <p class="text-xs text-gray-300 leading-relaxed">Most confident, fluid, and captivating male ramp performance</p>
+                            </div>
+                        </div>
+
+                        <!-- Best Attire Female -->
+                        <div class="relative overflow-hidden rounded-2xl bg-gradient-to-br from-violet-500/20 via-purple-600/20 to-violet-400/10 border-2 border-violet-400/40 shadow-2xl transform hover:scale-105 transition-all duration-300">
+                            <div class="absolute top-0 right-0 w-20 h-20 bg-violet-400/20 rounded-full -mr-10 -mt-10"></div>
+                            <div class="absolute bottom-0 left-0 w-16 h-16 bg-purple-500/20 rounded-full -ml-8 -mb-8"></div>
+                            <div class="relative p-6 text-center">
+                                <div class="mb-4">
+                                    <i class="fas fa-tshirt text-4xl text-violet-400 mb-2"></i>
+                                    <div class="w-12 h-1 bg-gradient-to-r from-violet-400 to-purple-500 mx-auto rounded-full"></div>
+                                </div>
+                                <h5 class="text-lg font-bold text-violet-400 mb-2">The Crest Fashionista</h5>
+                                <p class="text-sm text-purple-300 mb-3 font-semibold">Best Attire Female</p>
+                                <p class="text-xs text-gray-300 leading-relaxed">Most creative, unique, and well-put-together female attire</p>
+                            </div>
+                        </div>
+
+                        <!-- Best Attire Male -->
+                        <div class="relative overflow-hidden rounded-2xl bg-gradient-to-br from-indigo-500/20 via-blue-700/20 to-indigo-400/10 border-2 border-indigo-400/40 shadow-2xl transform hover:scale-105 transition-all duration-300">
+                            <div class="absolute top-0 right-0 w-20 h-20 bg-indigo-400/20 rounded-full -mr-10 -mt-10"></div>
+                            <div class="absolute bottom-0 left-0 w-16 h-16 bg-blue-500/20 rounded-full -ml-8 -mb-8"></div>
+                            <div class="relative p-6 text-center">
+                                <div class="mb-4">
+                                    <i class="fas fa-user-tie text-4xl text-indigo-400 mb-2"></i>
+                                    <div class="w-12 h-1 bg-gradient-to-r from-indigo-400 to-blue-500 mx-auto rounded-full"></div>
+                                </div>
+                                <h5 class="text-lg font-bold text-indigo-400 mb-2">The Crest Dapper</h5>
+                                <p class="text-sm text-blue-300 mb-3 font-semibold">Best Attire Male</p>
+                                <p class="text-xs text-gray-300 leading-relaxed">Most creative, unique, and well-put-together male attire</p>
+                            </div>
+                        </div>
                     </div>
 
-                    <h4 class="text-xl font-bold text-cyan-400 mt-6 mb-4">💬 Icebreaker Questions Examples</h4>
-                    <ul class="list-disc list-inside text-sm text-gray-300 space-y-2">
-                        <li><span class="font-bold text-pink-400">Emoji Mail:</span> "If you could only use emojis to reply to emails for a week, which 3 emojis would you use the most?"</li>
-                        <li><span class="font-bold text-pink-400">Work Habit Influence:</span> "What's one common work habit you think you've secretly influenced in your colleagues?"</li>
-                        <li><span class="font-bold text-pink-400">Job Theme Song:</span> "If your job role had a theme song, what would it be?"</li>
-                    </ul>
+
 
                 </div>
             </div>
-        </div>
+            </div>
+        </section>
 
         <!-- COUNTDOWN AND CTA -->
         <section class="text-center mt-12 mb-16">
@@ -754,34 +1597,7 @@
 
     </div>
     
-    <!-- HOST LOGIN MODAL (New Structure) -->
-    <div id="host-modal" class="modal-overlay">
-        <div class="modal-content">
-            <h3 class="text-2xl font-bold mb-4 text-center text-pink-400">Host & Coordinator Access</h3>
-            <p class="text-sm text-gray-400 mb-6 text-center">Enter the secret key to access the host planning page.</p>
-            
-            <input 
-                type="password" 
-                id="secret-key-input" 
-                class="w-full p-3 mb-4 rounded-lg bg-gray-800 border border-cyan-500 text-white focus:ring-2 focus:ring-cyan-400 focus:outline-none placeholder-gray-500" 
-                placeholder="Enter Secret Key"
-                onkeypress="if(event.key === 'Enter') document.getElementById('modal-submit-btn').click();"
-            />
 
-            <p id="modal-error" class="error-message text-center text-sm mb-4" style="display: none;">
-                <i class="fas fa-exclamation-triangle mr-1"></i> Incorrect key. Please try again.
-            </p>
-
-            <div class="flex justify-between space-x-4">
-                <button id="modal-close-btn" class="flex-1 py-2 rounded-lg bg-gray-600 text-white hover:bg-gray-700 transition duration-150">
-                    Cancel
-                </button>
-                <button id="modal-submit-btn" class="flex-1 py-2 rounded-lg bg-pink-600 text-white font-semibold hover:bg-pink-700 transition duration-150">
-                    Access
-                </button>
-            </div>
-        </div>
-    </div>
 
     <!-- FOOTER MESSAGE -->
     <footer class="main-footer">
@@ -858,59 +1674,97 @@
 
         let countdownInterval;
         
-        // --- 3. HOST LOGIN MODAL LOGIC (New) ---
-        const modal = document.getElementById('host-modal');
-        const hostLoginBtn = document.getElementById('host-login-btn');
-        const modalCloseBtn = document.getElementById('modal-close-btn');
-        const modalSubmitBtn = document.getElementById('modal-submit-btn');
-        const secretKeyInput = document.getElementById('secret-key-input');
-        const modalError = document.getElementById('modal-error');
-        const CORRECT_KEY = 'fun';
-
-        const openModal = () => {
-            modal.style.display = 'flex';
-            secretKeyInput.value = ''; // Clear previous input
-            modalError.style.display = 'none'; // Hide error
-            setTimeout(() => secretKeyInput.focus(), 100); // Focus input
-        };
-
-        const closeModal = () => {
-            modal.style.display = 'none';
-        };
-
-        const checkKey = () => {
-            const enteredKey = secretKeyInput.value.trim().toLowerCase();
-            if (enteredKey === CORRECT_KEY) {
-                // SUCCESS: Redirect to the host page
-                window.location.href = 'host.html';
-            } else {
-                // FAILURE: Show error message
-                modalError.style.display = 'block';
-                secretKeyInput.classList.add('border-pink-600', 'animate-shake');
-                setTimeout(() => {
-                    secretKeyInput.classList.remove('border-pink-600', 'animate-shake');
-                }, 500);
-            }
-        };
-
-        hostLoginBtn.addEventListener('click', openModal);
-        modalCloseBtn.addEventListener('click', closeModal);
-        modalSubmitBtn.addEventListener('click', checkKey);
-        
-        // Allow clicking outside the modal content to close it
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                closeModal();
-            }
-        });
-        
-        // --- 4. CTA Action ---
+        // --- 3. CTA Action ---
         document.getElementById('confirm-btn').addEventListener('click', () => {
              // In a real application, this would open a modal or navigate to a form.
              console.log("Confirmation button clicked! (In a real app, this would trigger a submission modal.)");
         });
 
 
+        // --- 4. NAVIGATION BAR FUNCTIONALITY ---
+        const navbar = document.getElementById('navbar');
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const navLinks = document.getElementById('nav-links');
+        
+        // Enhanced mobile menu toggle with animation
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            mobileMenuBtn.classList.toggle('active');
+            
+            // Add animation to burger icon
+            const barsIcon = mobileMenuBtn.querySelector('.fa-bars');
+            const timesIcon = mobileMenuBtn.querySelector('.fa-times');
+            
+            if (navLinks.classList.contains('active')) {
+                if (barsIcon) barsIcon.style.display = 'none';
+                if (timesIcon) timesIcon.style.display = 'block';
+                // Prevent body scrolling when menu is open
+                document.body.style.overflow = 'hidden';
+            } else {
+                if (barsIcon) barsIcon.style.display = 'block';
+                if (timesIcon) timesIcon.style.display = 'none';
+                // Restore body scrolling
+                document.body.style.overflow = 'auto';
+            }
+        });
+        
+        // Close mobile menu when clicking on links
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                mobileMenuBtn.classList.remove('active');
+                
+                const barsIcon = mobileMenuBtn.querySelector('.fa-bars');
+                const timesIcon = mobileMenuBtn.querySelector('.fa-times');
+                
+                if (barsIcon) barsIcon.style.display = 'block';
+                if (timesIcon) timesIcon.style.display = 'none';
+                
+                // Restore body scrolling
+                document.body.style.overflow = 'auto';
+            });
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!navbar.contains(e.target) && navLinks.classList.contains('active')) {
+                navLinks.classList.remove('active');
+                mobileMenuBtn.classList.remove('active');
+                
+                const barsIcon = mobileMenuBtn.querySelector('.fa-bars');
+                const timesIcon = mobileMenuBtn.querySelector('.fa-times');
+                
+                if (barsIcon) barsIcon.style.display = 'block';
+                if (timesIcon) timesIcon.style.display = 'none';
+                
+                document.body.style.overflow = 'auto';
+            }
+        });
+        
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+        
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const offsetTop = target.offsetTop - 100; // Account for navbar height
+                    window.scrollTo({
+                        top: offsetTop,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
         window.onload = function () {
             setupAccordions();
             // Start the countdown
